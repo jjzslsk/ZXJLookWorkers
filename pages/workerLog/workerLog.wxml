@@ -1,0 +1,60 @@
+<!--pages/workerLog/workerLog.wxml-->
+<view class="body">
+  <scroll-view scroll-y class='scroll-area'>
+    <view class='info-content'>
+      <view class='aui-flex-col aui-flex-middle log-list' wx:for="{{bbsList}}" wx:for-item="li" wx:key="SUBJECT_ID" data-id="{{li.SUBJECT_ID}}" bindtap="openWorkerLogDetail">    
+        <!-- <view class="aui-flex-item-7 log-title">项目介绍：横溢工地</view>
+        <view class="aui-flex-item-5 log-date">2019-08-26</view> -->
+        <view class="aui-flex-item-12" wx:if="{{li.IMG_LIST.length>0}}">  
+          <view class="aui-flex-item-4" wx:if="{{li.videoPath}}">
+            <image class="img-video" src="/images/worker/play.png"></image>
+            <image class="log-img" mode='aspectFill' src='{{li.IMG_LIST[0].URL}}'></image>
+          </view>
+          <view class="aui-flex-item-4" wx:else>
+            <view class="img-count" wx:if="{{li.IMG_LIST.length>1}}">共{{li.IMG_LIST.length}}张</view>
+            <image class="log-img" mode='aspectFill' src='{{li.IMG_LIST[0].URL}}'></image>
+          </view>
+          <view class="aui-flex-item-8">
+            <view class="log-desc-title">{{li.SUBJECT_TITLE}}</view>
+            <view class="log-desc ellipsis-2">{{li.SUBJECT_MEMO}}</view>
+            <view class="log-footer">
+              <view class="aui-flex-item-1">               
+                <image class="log-footer-icon" src="/images/worker/log-like-act.png" wx:if="{{li.ZAN_FLAG=='1'}}"></image>
+                <image class="log-footer-icon" src="/images/worker/log-like.png" wx:else></image>
+              </view>
+              <view class="aui-flex-item-3 padded-l-5">{{li.DZ_NUM ? li.DZ_NUM:'0'}}</view>
+              <view class="aui-flex-item-1">
+                <image class="log-footer-icon" src="/images/worker/log-cmt.png"></image>
+              </view>
+              <view class="aui-flex-item-3 padded-l-5">{{li.HF_NUM ? li.HF_NUM:'0'}}</view>
+              <view class="aui-flex-item-1">
+                <image class="log-footer-icon" src="/images/worker/log-repost.png"></image>
+              </view>
+              <view class="aui-flex-item-3 padded-l-5">{{li.NO_NUM ? li.NO_NUM:'0'}}</view>
+            </view>
+          </view>
+        </view>
+
+        <view class="aui-flex-item-12" wx:else>  
+          <view class="log-desc-title">{{li.SUBJECT_TITLE}}</view>
+          <view class="log-desc ellipsis-2">{{li.SUBJECT_MEMO}}</view>
+          <view class="log-footer">
+            <view class="aui-flex-item-1">
+              <image class="log-footer-icon" src="/images/worker/log-like.png"></image>
+            </view>
+            <view class="aui-flex-item-3 padded-l-5">{{li.OK_NUM ? li.OK_NUM:'0'}}</view>
+            <view class="aui-flex-item-1">
+              <image class="log-footer-icon" src="/images/worker/log-cmt.png"></image>
+            </view>
+            <view class="aui-flex-item-3 padded-l-5">{{li.HF_NUM ? li.HF_NUM:'0'}}</view>
+            <view class="aui-flex-item-1">
+              <image class="log-footer-icon" src="/images/worker/log-repost.png"></image>
+            </view>
+            <view class="aui-flex-item-3 padded-l-5">{{li.NO_NUM ? li.NO_NUM:'0'}}</view>
+          </view> 
+        </view>
+
+      </view>      
+    </view>
+  </scroll-view>
+</view>

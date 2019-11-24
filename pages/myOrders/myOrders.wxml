@@ -1,0 +1,54 @@
+<!--pages/myRequire/myRequire.wxml-->
+<view class='body'>
+  <view class='status-item'>
+    <view class='aui-flex-col aui-flex-middle padded-5'>
+      <view class='aui-flex-item-3 padded-5' wx:for-item="li" wx:key="" wx:for="{{statusText}}">
+        <view class='{{li.val==pickedStatus ? "status status-act":"status"}}' data-status="{{li.val}}" bindtap='statusTap'>
+          {{li.name}}
+          <text class='{{li.val==pickedStatus ? "":"order-count"}}' wx:if="{{totalCount>0 && index==0}}">({{totalCount}})</text>
+          <text class='{{li.val==pickedStatus ? "":"order-count"}}' wx:if="{{statusCount.invite && statusCount.invite>0 && index==1}}">({{statusCount.invite}})</text>
+          <text class='{{li.val==pickedStatus ? "":"order-count"}}' wx:if="{{statusCount.bidding && statusCount.bidding>0 && index==2}}">({{statusCount.bidding}})</text>
+          <text class='{{li.val==pickedStatus ? "":"order-count"}}' wx:if="{{statusCount.myOrder && statusCount.myOrder>0 && index==3}}">({{statusCount.myOrder}})</text>
+          <text class='{{li.val==pickedStatus ? "":"order-count"}}' wx:if="{{statusCount.atWork && statusCount.atWork>0 && index==4}}">({{statusCount.atWork}})</text>
+          <text class='{{li.val==pickedStatus ? "":"order-count"}}' wx:if="{{statusCount.uncompleted && statusCount.uncompleted>0 && index==5}}">({{statusCount.uncompleted}})</text>
+          <text class='{{li.val==pickedStatus ? "":"order-count"}}' wx:if="{{statusCount.confirmCompleted && statusCount.confirmCompleted>0 && index==6}}">({{statusCount.confirmCompleted}})</text>
+        </view>
+      </view>
+    </view>
+    
+  </view>
+  <x-scroll-view scroll-y class='scroll-area' refreshing="{{refreshing}}" nomore="{{nomore}}" bindpulldownrefresh="myOnPullRefresh" bindloadmore="myOnLoadmore" bindscroll="myOnScroll">
+    <view class="list-info"  wx:for="{{list}}" wx:for-item="li" wx:key="work_demaed_id" data-id="{{li.work_demaed_id}}" data-status="{{li.work_status}}" bindtap='openOrderDetial'>
+      <view class='aui-flex-col aui-flex-middle'>
+        <view class='aui-flex-item-8 order-no'>
+          <!-- <text class='status-text'>[{{statusText[li.work_status+1].name}}]</text> -->
+          单号：{{li.order_number}}
+          <text class='invite-order' wx:if="{{li.work_type=='1'}}">邀约</text>
+        </view>
+        <view class='aui-flex-item-4 text-right'>{{li.creat_time}}</view>
+        <view class='aui-flex-item-12 order-info'>
+          <view class='aui-flex-col'>
+            <view class='aui-flex-item-12'><text class='color-tips'>订单状态：</text>{{statusText[li.work_status+1].name}}</view>
+            <view class='aui-flex-item-12'>
+              <text class='color-tips'>工作需求：</text>
+              <text class='class-item' wx:for="{{li.classify}}" wx:for-item="item" wx:key="ROWID">{{item.name}}</text>
+            </view>
+            <view class='aui-flex-item-12'><text class='color-tips'>开工时间：</text>{{li.plan_start_date}}</view>
+            <view class='aui-flex-item-12'><text class='color-tips'>工作地点：</text>{{li.work_address}}</view>
+            <view class='aui-flex-item-6' wx:if="{{li.send_wages}}"><text class='color-tips'>工资：</text>{{li.send_wages}}</view>            
+            <view class='aui-flex-item-6' wx:if="{{li.plan_end_day}}"><text class='color-tips'>工作天数：</text>{{li.plan_end_day}}天</view>
+            <view class='aui-flex-item-6' wx:if="{{li.plan_people_num}}"><text class='color-tips'>需求人数：</text>{{li.plan_people_num}}人</view>
+            <view class='aui-flex-item-6' wx:if="{{li.send_memo_team}}"><text class='color-tips'>其它说明：</text>{{li.send_memo_team}}</view>           
+            <view class='aui-flex-item-12' wx:if="{{li.send_memo}}"><text class='color-tips'>说明：</text>{{li.send_memo}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='no-data' wx:if="{{list.length==0}}">
+      暂无数据
+    </view>
+
+
+  
+  </x-scroll-view>
+</view>

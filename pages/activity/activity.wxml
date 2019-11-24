@@ -1,0 +1,12 @@
+<!--pages/activity/activity.wxml-->
+<view class='mall-box'>
+<scroll-view class='scroll-area' scroll-y scroll-x="true">
+  <!-- <image class="mall-img" mode="widthFix" src='http://www.zxj888.cn/photo/zxj_shop_icon/advertisingImg/activity.jpg'></image> -->
+
+  <image class="mall-img" mode="scaleToFill" src='{{detailImg}}' wx:if="{{detailImg}}"></image>
+  <!-- <view class='content' wx:else>
+    <rich-text class="content-info" nodes="{{detail.ARTICLE_NOTES}}"></rich-text>
+  </view> -->
+  <view class="footer-btn" bindtap='openDetail' wx:if="{{detail.CLIENT_CLASS_ID}}">立即预约</view>
+</scroll-view>
+</view>

@@ -1,0 +1,34 @@
+<!--pages/search/search.wxml-->
+<view class="body">
+  <view class='aui-flex-col aui-flex-middle search-bar'>
+    <view class='aui-flex-item-10 search-input-bar'>
+      <input class='search-input' value='{{keywords}}' type='search' bindinput="onInputChange" placeholder='请输入搜索关键字' bindfocus="searchInputFocus" bindblur="searchInputBlur" confirm-type="search" focus="true"></input>
+      <image class="search-clear" src="/images/search_clear.png" wx:if="{{keywords}}" bindtap="clearInput"></image>
+    </view>
+    <view class='aui-flex-item-2 search-btn' bindtap='doSearch'>搜索</view>
+  </view>
+
+  <scroll-view scroll-y class='scroll-area'>  
+    <view class="history-list" wx:if="{{focus}}">
+      <view class="history" wx:for="{{searchList}}" wx:for-item="li" wx:key="index" data-text="{{li}}" bindtap="historySearch">{{li}}</view>
+      <view class="clear-btn" bindtap="clearHistory" wx:if="{{searchList.length>0}}">清除历史记录</view>
+    </view>
+    <view class='item-list' wx:else>
+      <view class='items' wx:for="{{classList}}" wx:for-item="classItem" wx:key="classIndex" wx:if="{{classItem.child.length>0}}">
+        <view class='item-title'>{{classItem.CLASS_NAME}}</view>
+        <view class='aui-flex-col item-child'>
+          <view class='aui-flex-item-25' wx:for="{{classItem.child}}" wx:for-item="childItem" wx:key="childIndex" data-pid="{{classItem.CLIENT_CLASS_ID}}" data-pname="{{classItem.CLASS_NAME}}" data-id="{{childItem.CLIENT_CLASS_ID}}" data-name="{{childItem.CLASS_NAME}}" bindtap='openClassDetail'>
+            <image class='class-icon' src="{{childItem.CLASS_ICON}}" wx:if="{{childItem.CLASS_ICON}}"/>
+            <image class='class-icon' src="/images/placeholder.png" wx:else/>
+            <view class='class-name'>{{childItem.CLASS_NAME}}</view>
+          </view>
+        </view>      
+      </view>
+      <view class="no-data">
+        <text wx:if="{{nodata=='1'}}">请输入关键字搜索</text>
+        <text wx:elif="{{nodata=='2'}}">搜索中</text>
+        <text wx:elif="{{nodata=='3'}}">暂无其他工种</text>
+      </view>
+    </view> 
+  </scroll-view>
+</view>

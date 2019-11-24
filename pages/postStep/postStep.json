@@ -1,0 +1,12 @@
+{
+  "navigationBarTitleText": "选择工种",
+  "usingComponents": {
+    "i-switch": "/dist/switch/index",
+    "i-input": "/dist/input/index",
+    "payDialog": "/components/payDialog/payDialog",
+    "i-radio-group": "/dist/radio-group/index",
+    "i-radio": "/dist/radio/index",
+    "i-checkbox-group": "/dist/checkbox-group/index",
+    "i-checkbox": "/dist/checkbox/index"
+  }
+}

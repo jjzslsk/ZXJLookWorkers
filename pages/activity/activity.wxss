@@ -1,0 +1,9 @@
+/* pages/activity/activity.wxss */
+.mall-img{width: 100%;height:calc(100% - 45px);}
+.mall-box {width: 100%;height: 100vh;background: #F5F5F5;}
+.scroll-area {width: 100%;height: 100%;}
+.content{box-sizing: border-box;}
+.content-info{font-size: 0.8em;}
+.content-info image{width:100%;height: 100px !important;}
+
+.footer-btn{height: 45px;line-height: 45px;text-align: center;font-size: 0.8em;background:#f1c40f;color: #FFFFFF;position: fixed;bottom: 0;width: 100%;}

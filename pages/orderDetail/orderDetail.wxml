@@ -1,0 +1,416 @@
+<!--pages/orderDetail/orderDetail.wxml-->
+<view class='body'>
+  <view class='aui-flex-col aui-flex-middle step-info'>
+    <view class="aui-flex-item-2" wx:for="{{stepsList}}" wx:for-item="step" wx:key="index">
+      <view class='{{step.steps>(detail.work_status+1) ? "step-dashedline-l":"step-solidline-l"}}' wx:if="{{index>0}}"></view>
+      <view class='{{step.steps==(detail.work_status+1) ? "step-no step-no-act":"step-no"}}'>{{step.steps}}</view>
+      <view class='{{step.steps==(detail.work_status+1) ? "step-tips step-tips-act":"step-tips"}}'>{{step.stepsName}}</view>
+      <view class='{{step.steps>=(detail.work_status+1) ? "step-dashedline-r":"step-solidline-r"}}' wx:if="{{index<(stepsList.length-1)}}"></view>
+    </view>
+  </view>
+  <scroll-view scroll-y class='{{type=="manage" ? "scroll-area":"scroll-area2"}}'>    
+    <view class='aui-flex-col aui-flex-middle header'>
+      <view class="aui-flex-item-7 order-no">单号：{{detail.order_number}}<text class='invite-order' wx:if="{{detail.work_type=='1'}}">邀约</text></view>
+      <view class="aui-flex-item-5 text-right">{{detail.creat_time}}</view>
+    </view>
+    
+    <view class='padded-10-0'>  
+      <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.work_type=='1' && type=='manage'}}">
+        <view class="aui-flex-item-3 title">工匠：</view>
+        <view class="aui-flex-item-9 content" bindtap="openWorkerDetail" data-id="{{detail.workerInfo.CLIENT_ID}}" data-name="{{detail.workerInfo.shortName}}">{{detail.workerInfo.shortName}}</view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle list' wx:if="{{type=='manage'}}">
+        <view class="aui-flex-item-3 title">状态：</view>
+        <view class="aui-flex-item-9 content" wx:if="{{detail.work_status=='0'}}">我的发布</view>
+        <view class="aui-flex-item-9 content" wx:elif="{{detail.work_status=='1'}}">报价订单</view>
+        <view class="aui-flex-item-9 content" wx:elif="{{detail.work_status=='2'}}">开工确认</view>
+        <view class="aui-flex-item-9 content" wx:elif="{{detail.work_status=='3'}}">施工中</view>
+        <view class="aui-flex-item-9 content" wx:elif="{{detail.work_status=='4'}}">竣工确认</view>
+        <view class="aui-flex-item-9 content" wx:elif="{{detail.work_status=='5'}}">竣工完成</view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle list'>
+        <view class="aui-flex-item-3 title">需要找：</view>
+        <view class="aui-flex-item-9 content">
+          <view class='classify-item' wx:for="{{detail.classify}}" wx:for-item="item" wx:key="ROWID">{{item.name}}</view>
+        </view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle list'>
+        <view class="aui-flex-item-3 title">开工时间：</view>
+        <view class="aui-flex-item-7 content">{{detail.plan_start_date}}</view>
+        <!-- <view class="aui-flex-item-2">
+          <view class='time-edit' bindtap='editOpenTime' wx:if="{{detail.work_status=='2'}}">修改</view>
+        </view> -->
+      </view>
+      <view class='aui-flex-col aui-flex-middle list'>
+        <view class="aui-flex-item-3 title">工作地点：</view>
+        <view class="aui-flex-item-9 content">{{detail.work_address}}</view>
+      </view>
+
+      <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.send_wages}}">
+        <view class="aui-flex-item-3 title">工资标准：</view>
+        <view class="aui-flex-item-9 content">{{detail.send_wages}}</view>
+      </view>  
+      <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.plan_end_day}}">
+        <view class="aui-flex-item-3 title">预计天数：</view>
+        <view class="aui-flex-item-9 content">{{detail.plan_end_day}}天</view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.plan_people_num}}">
+        <view class="aui-flex-item-3 title">所需人数：</view>
+        <view class="aui-flex-item-9 content">{{detail.plan_people_num}}人</view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.send_unit_hour}}">
+        <view class="aui-flex-item-3 title">工程预算：</view>
+        <view class="aui-flex-item-9 content">{{detail.send_unit_hour}}</view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.cityName}}">
+        <view class="aui-flex-item-3 title">所在城市：</view>
+        <view class="aui-flex-item-9 content">{{detail.cityName.org_name}}</view>
+      </view>
+      
+      <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.send_memo}}">
+        <view class="aui-flex-item-3 title">需求说明：</view>
+        <view class="aui-flex-item-9 content">{{detail.send_memo}}</view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.send_memo_team}}">
+        <view class="aui-flex-item-3 title">其它说明：</view>
+        <view class="aui-flex-item-9 content">{{detail.send_memo_team}}</view>
+      </view>
+    </view>
+
+    <view class="sub-title">工作场景：</view>
+    <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.pics && detail.pics.length>0}}">    
+      <view class="aui-flex-item-4 list-img" wx:for="{{detail.pics}}" wx:for-item="pic" wx:key="ROWID">
+        <image class='lm' src='{{pic.url}}' data-type="pics" data-i="{{index}}" bindtap='previewImage'></image>
+      </view>
+    </view>
+    <view class='no-pic' wx:else>暂无图片</view>
+
+    <view wx:if="{{type=='manage'}}">
+    <view wx:if="{{detail.work_status!='0'}}">
+      <view class="sub-title">工人首次报价：</view>
+      <view class='padded-10-0' wx:if="{{detail.biddingPrice && detail.biddingPrice.length>0}}">
+        <view class='aui-flex-col aui-flex-middle list' wx:for="{{detail.biddingPrice}}" wx:for-item="item" wx:key="id">    
+          <view class="aui-flex-item-2" bindtap="openWorkerDetail" data-id="{{item.worker_id}}" data-name="{{item.name}}">
+            <image wx:if='item.AVATAR' class='worker-avatar' src='{{item.AVATAR}}'></image>
+            <image wx:else class='worker-avatar' src='/images/head.png'></image>
+          </view>
+          <view class="aui-flex-item-3 text-left">{{item.name}}</view>
+          <view class="aui-flex-item-2" data-id="{{item.worker_id}}" data-name="{{item.name}}" data-avatar="{{item.AVATAR}}" bindtap='chatTap2'>
+            <image class='chat-icon' src='/images/icon/chat.png'></image>
+          </view>
+          <view class="aui-flex-item-2 price">￥{{item.budget}}</view>
+          <view class="aui-flex-item-3" wx:if="{{detail.work_status=='1'}}">
+            <view class='accept-price-btn' data-id="{{item.id}}" data-name="{{item.client_account}}" data-price="{{item.budget}}" bindtap='confirmPrice'>选择报价</view>
+          </view>
+          <view class="aui-flex-item-3" wx:elif="{{(detail.work_status=='2' || detail.work_status=='3' || detail.work_status=='4' || detail.work_status=='5') && detail.bidding_price_id==item.id}}">
+            <view class='accept-price-status' >已确认</view>
+          </view>
+        </view> 
+      </view>
+      <view class='no-pic' wx:else>暂无报价</view>
+    </view>
+
+    <!-- <view class='aui-flex-col aui-flex-middle list margin-t-10'>
+      <view class="aui-flex-item-4 title">工人现场报价：</view>
+      <view class="aui-flex-item-8 content2">
+        <text class='price' wx:if="{{detail.worker_budget}}">￥{{detail.worker_budget}}</text>
+        <text wx:else>暂无现场报价</text>
+      </view>
+    </view> -->
+
+    <view class='padded-10-0 margin-t-10' wx:if="{{detail.work_status=='4' ||  detail.work_status=='5'}}">    
+      <view class='aui-flex-col aui-flex-middle list'>
+        <view class="aui-flex-item-3 title">结算金额：</view>
+        <view class="aui-flex-item-9 content price">￥{{detail.total_budget}}</view>
+      </view>
+    </view>
+
+    <view class="sub-title" wx:if="{{detail.moneyChange && detail.moneyChange.length>0}}">调整金额记录：
+      <view class='refresh-btn' bindtap='refreshEditList'>刷新</view>
+    </view>
+    <view class='padded-10-0' wx:if="{{detail.moneyChange && detail.moneyChange.length>0}}">
+      <view class='aui-flex-col aui-flex-middle list text-center'>    
+        <view class="aui-flex-item-3 font-b">调整人</view>     
+        <view class="aui-flex-item-3 font-b">金额</view>
+        <view class="aui-flex-item-3 font-b">原因</view>
+        <view class="aui-flex-item-3 font-b">时间</view>
+      </view> 
+      <view class='aui-flex-col aui-flex-middle list text-center' wx:for="{{detail.moneyChange}}" wx:for-item="item" wx:key="ROWID">    
+        <view class="aui-flex-item-3">{{item.CLIENT_ACCOUNT}}</view>     
+        <view class="aui-flex-item-3 price">￥{{item.money}}</view>
+        <view class="aui-flex-item-3 ellipsis-1 text-left" data-content="{{item.remark}}" bindtap='showRemark'>{{item.remark}}</view>
+        <view class="aui-flex-item-3">{{item.update_time}}</view>
+      </view> 
+    </view>
+
+    <view class='aui-flex-col aui-flex-middle list margin-t-10' wx:if="{{detail.work_status=='3'}}">
+      <view class="aui-flex-item-4 title" style='font-size:15px;'>追加需求总款：</view>
+      <view class="aui-flex-item-8 content2">
+        <input style='font-size:15px;' placeholder='请输入金额' type="digit" data-type="editPrice" bindinput="onInputChange" value='{{money}}'></input>
+      </view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.work_status=='3'}}">
+      <view class="aui-flex-item-4 title" style='font-size:15px;'>追加理由：</view>
+      <view class="aui-flex-item-8 content2">
+        <!-- <textarea placeholder='请输入理由' auto-height="true" data-type="editPriceReason" bindinput="onInputChange" value='{{remark}}'></textarea> -->
+        <input style='font-size:15px;' placeholder='请输入理由' data-type="editPriceReason" bindinput="onInputChange" value='{{remark}}'></input>
+      </view>
+    </view>
+
+    <view wx:if="{{detail.work_status!='0'}}">
+      <view wx:if="{{detail.work_status=='4' || detail.work_status=='5'}}">
+        <view class="sub-title">竣工图片：</view>
+        <view class='aui-flex-col aui-flex-middle list' wx:if="{{detail.workPics && detail.workPics.length>0}}">    
+          <view class="aui-flex-item-4 list-img" wx:for="{{detail.workPics}}" wx:for-item="pic" wx:key="ROWID">
+            <image class='lm' src='{{pic.url}}' data-type="workPics" data-i="{{index}}" bindtap='previewImage'></image>
+          </view>
+        </view>
+        <view class='no-pic' wx:else>暂无图片</view>
+      </view>      
+
+      <view wx:if="{{detail.work_status=='4'}}">
+        <view class="sub-title">竣工评价：</view>
+        <view class='padded-10-0'>
+          <view class='aui-flex-col aui-flex-middle list'>    
+            <view class="aui-flex-item-3 text-right">工人技术：</view>
+            <view class="aui-flex-item-1"></view>
+            <view class="aui-flex-item-8">
+              <image class='pf-icon' src='{{level>0 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="level" data-num="1" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{level>1 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="level" data-num="2" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{level>2 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="level" data-num="3" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{level>3 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="level" data-num="4" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{level>4 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="level" data-num="5" bindtap='onPFIconTap'></image>
+            </view>
+          </view>
+          <view class='aui-flex-col aui-flex-middle list'>    
+            <view class="aui-flex-item-3 text-right">工人态度：</view>
+            <view class="aui-flex-item-1"></view>
+            <view class="aui-flex-item-8">
+              <image class='pf-icon' src='{{attitude>0 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="attitude" data-num="1" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{attitude>1 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="attitude" data-num="2" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{attitude>2 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="attitude" data-num="3" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{attitude>3 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="attitude" data-num="4" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{attitude>4 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="attitude" data-num="5" bindtap='onPFIconTap'></image>
+            </view>
+          </view>
+          <view class='aui-flex-col aui-flex-middle list'>    
+            <view class="aui-flex-item-3 text-right">执行标准：</view>
+            <view class="aui-flex-item-1"></view>
+            <view class="aui-flex-item-8">
+              <image class='pf-icon' src='{{perform>0 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="perform" data-num="1" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{perform>1 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="perform" data-num="2" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{perform>2 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="perform" data-num="3" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{perform>3 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="perform" data-num="4" bindtap='onPFIconTap'></image>
+              <image class='pf-icon' src='{{perform>4 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}' data-type="perform" data-num="5" bindtap='onPFIconTap'></image>
+            </view>
+          </view>
+          <view class='aui-flex-col aui-flex-middle list'>    
+            <view class="aui-flex-item-3 list-pj">
+              <view class='{{pjTag[0] ? "pj-item pj-item-act":"pj-item"}}' data-i="0" data-content="技能熟练" bindtap='onPJTagTap'>技能熟练</view>
+            </view>
+            <view class="aui-flex-item-3 list-pj">
+              <view class='{{pjTag[1] ? "pj-item pj-item-act":"pj-item"}}' data-i="1" data-content="诚实信用" bindtap='onPJTagTap'>诚实信用</view>
+            </view>
+            <view class="aui-flex-item-3 list-pj">
+              <view class='{{pjTag[2] ? "pj-item pj-item-act":"pj-item"}}' data-i="2" data-content="服务优质" bindtap='onPJTagTap'>服务优质</view>
+            </view>
+            <view class="aui-flex-item-3 list-pj">
+              <view class='{{pjTag[3] ? "pj-item pj-item-act":"pj-item"}}' data-i="3" data-content="交付及时" bindtap='onPJTagTap'>交付及时</view>
+            </view>
+          </view>
+          <view class='aui-flex-col aui-flex-middle list padded-10'>    
+            <view class='aui-flex-item-4 padded-10-0'>评价内容：</view>
+            <view class='aui-flex-item-8 padded-10-0'>
+              <checkbox-group bindchange="checkboxChange">
+                <label class="checkbox">
+                  <checkbox value="{{isAnon}}"/>匿名
+                </label>
+              </checkbox-group>
+            </view>
+            <view class='aui-flex-item-12'>
+              <textarea placeholder='请输入评价文字' auto-height="true" data-type="pjContent" bindinput="onInputChange"></textarea>
+            </view>
+          </view>
+        </view>
+      </view>
+
+      <view wx:if="{{detail.work_status=='5'}}">
+        <view class="sub-title">竣工评价：</view>
+        <view class='padded-10-0'>
+          <view class='aui-flex-col aui-flex-middle list'>    
+            <view class="aui-flex-item-3 text-right">工人技术：</view>
+            <view class="aui-flex-item-1"></view>
+            <view class="aui-flex-item-8">
+              <image class='pf-icon' src='{{detail.workComment.level>0 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.level>1 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.level>2 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.level>3 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.level>4 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+            </view>
+          </view>
+          <view class='aui-flex-col aui-flex-middle list'>    
+            <view class="aui-flex-item-3 text-right">工人态度：</view>
+            <view class="aui-flex-item-1"></view>
+            <view class="aui-flex-item-8">
+              <image class='pf-icon' src='{{detail.workComment.attitude>0 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.attitude>1 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.attitude>2 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.attitude>3 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.attitude>4 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+            </view>
+          </view>
+          <view class='aui-flex-col aui-flex-middle list'>    
+            <view class="aui-flex-item-3 text-right">执行标准：</view>
+            <view class="aui-flex-item-1"></view>
+            <view class="aui-flex-item-8">
+              <image class='pf-icon' src='{{detail.workComment.perform>0 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.perform>1 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.perform>2 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.perform>3 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+              <image class='pf-icon' src='{{detail.workComment.perform>4 ? "/images/worker/star_red.png":"/images/worker/star_gray.png"}}'></image>
+            </view>
+          </view>
+          <view class='aui-flex-col aui-flex-middle list'>    
+            <view class="aui-flex-item-3 list-pj" wx:for="{{detail.workComment.tags}}" wx:for-item="tag" wx:key="index">
+              <view class='pj-item pj-item-act'>{{tag}}</view>
+            </view>
+          </view>
+          <view class='aui-flex-col aui-flex-middle list padded-10'>    
+            <view class='padded-10-0'>评价内容：</view>
+            <view class='padded-10-0'>{{detail.workComment.content ? detail.workComment.content:'无'}}</view>
+          </view>
+        </view>
+      </view>
+
+    </view>
+
+    </view>
+    
+    <view class='order-note' wx:if="{{type=='manage'}}">
+      <view class='title'>订单须知：</view>
+      <view class='content'>
+      1、发布需求是面向众多工匠发布广告，发布后会有多个工匠师傅报价，请您关注微信及短信提示，<text class='cl-org'>您可根据工匠工人信息与报价或“聊一聊”后选择合适工匠师傅，并预先支付其报价至平台，（500元以内全额支付，500元以上支付定金）</text>
+      </view>
+      <view class='content'>
+      2、师傅将与您预约上门服务时间，请及时关注微信/短信推送。
+      </view>
+      <view class='content'>
+      3、师傅上门服务时，根据施工现场情况（第一次报价与现场预估价格不一致时），需双方协商，业主同意后确认开工。如工匠认为价格需调高，业主不同意，师傅需按首次报价施工，否则平台将扣去师傅一定押金。
+      </view>
+      <view class='content'>
+      4、竣工确认之后，您预付至平台的款项将转付至工匠账户，请及时并谨慎评价确认。
+      </view>
+      <view class='title'>下单流程：</view>
+      <view class='aui-flex-col aui-flex-middle padding-0'>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step1.jpg'></image>
+        </view>
+        <view class='flex-item-arrow'>
+          <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+        </view>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step2.jpg'></image>
+        </view>
+        <view class='flex-item-arrow'>
+          <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+        </view>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step3.jpg'></image>
+        </view>
+        <view class='flex-item-arrow'>
+          <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+        </view>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step4.jpg'></image>
+        </view>
+        <view class='flex-item-arrow'>
+          <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+        </view>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step5.jpg'></image>
+        </view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle padding-0'>
+        <view class='flex-item-step padding-0'>发布需求</view>
+        <view class='flex-item-arrow'></view>
+        <view class='flex-item-step padding-0'>工匠报价</view>
+        <view class='flex-item-arrow'></view>
+        <view class='flex-item-step padding-0'>选择工匠</view>
+        <view class='flex-item-arrow'></view>
+        <view class='flex-item-step padding-0'>现场施工</view>
+        <view class='flex-item-arrow'></view>
+        <view class='flex-item-step padding-0'>服务评价</view>
+      </view>
+      <view class='title'>服务承诺：</view>
+      <view class='content'>
+        <view class='cl-org'>一、未服务全额退款</view>
+        <view>未选择工匠报价前可随时终止订单。如业主选择报价后，工匠师傅取消订单，全额退款将于0-3个工作日到账。</view>
+      </view>
+      <view class='content'>
+        <view class='cl-org'>二、预约时间</view>
+        <view>用户支付首次报价订单完成后，师傅将会在1小时内跟用户预约上门服务的时间。</view>
+      </view>
+      <view class='content'>
+        <view class='cl-org'>三、准时上门</view>
+        <view>师傅按照预约时间，准时上门服务。</view>
+      </view>
+      <view class='tips'>
+        <view class='tips-title'>线上交易保障</view>
+        <view>线上交易能够享受权益保障，平台在线支付订单均为凭证。为了保障您的权益，请选择线上交易。</view>
+      </view>
+    </view>
+    <view wx:else>
+      <image class='download-img' mode='widthFix' src='/images/download.jpg'></image>
+    </view>
+
+  </scroll-view>
+
+  <view wx:if="{{type=='manage'}}">
+    <view class='aui-flex-col aui-flex-middle footer' wx:if="{{detail.work_status=='0'}}">
+      <view class='aui-flex-item-12 bg-org' bindtap='cancelOrder'>取消订单</view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle footer' wx:elif="{{detail.work_status=='1'}}">
+      <view class='aui-flex-item-13 bg-org' bindtap='cancelOrder'>取消订单</view>
+      <view class='aui-flex-item-14 bg-confirm' bindtap='chatTap'>聊一聊</view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle footer' wx:elif="{{detail.work_status=='2'}}">
+      <view class='aui-flex-item-4 bg-org' bindtap='cancelOrder'>取消订单</view>
+      <view class='aui-flex-item-4 bg-confirm' bindtap='chatTap'>聊一聊</view>
+      <view class='aui-flex-item-4 bg-theme' bindtap='startWork'>确认开工</view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle footer' wx:elif="{{detail.work_status=='3'}}">
+      <view class='aui-flex-item-6 bg-confirm' bindtap='chatTap'>聊一聊</view>
+      <view class='aui-flex-item-6 bg-theme' bindtap='editPrice'>提交追加付款</view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle footer' wx:elif="{{detail.work_status=='4'}}">
+      <view class='aui-flex-item-6 bg-confirm' bindtap='chatTap'>聊一聊</view>
+      <view class='aui-flex-item-6 bg-theme' bindtap='confirmWorkDone'>确认竣工</view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle footer' wx:elif="{{detail.work_status=='5'}}">
+      <view class='aui-flex-item-6 bg-confirm' bindtap='chatTap'>聊一聊</view>
+      <view class='aui-flex-item-6 bg-theme' bindtap='afterSale'>申请售后</view>
+    </view>
+  </view>
+</view>
+
+<!-- 选择支付方式payDialog-->
+<payDialog id='payDialog'></payDialog>
+
+<i-modal title="" visible="{{ balVisible }}" bind:ok="handleOk" bind:cancel="handleClose">
+  <view class='aui-flex-col aui-flex-middle'>
+    <view class='aui-flex-item-4 list-title'>开工日期：</view>
+    <view class='aui-flex-item-8 list-text'>
+      <picker mode="date" value="{{planStartDate}}" bindchange="bindDateChange">
+        <view class="picker">{{planStartDate}}</view>
+      </picker>
+    </view>  
+  </view>
+  <view class='aui-flex-col aui-flex-middle border-b'>
+    <view class='aui-flex-item-4 list-title'>时间：</view>
+    <view class='aui-flex-item-8 list-text'>
+      <picker mode="time" value="{{planStartTime}}" bindchange="bindTimeChange">
+        <view class="picker">{{planStartTime}}</view>
+      </picker>
+    </view>  
+  </view>
+</i-modal>

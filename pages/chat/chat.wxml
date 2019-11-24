@@ -1,0 +1,86 @@
+<!--pages/chat/chat.wxml-->
+<wxs module="common" src="../../utils/common.wxs"></wxs>
+<view class='body-bg '>
+  <view class='connect-hint' wx:if="{{webSocketErrHint.length>0}}" bindtap="againConnectSocketTap">{{webSocketErrHint}}</view>
+  <!-- 对话框区域 -->
+  <scroll-view id='chat_scroll' scroll-y class="{{showAttArea || showEmotionArea ?'scroll-area02':'scroll-area01'}}" scroll-top='{{scrollTop}}' bindscroll="onScroll" bindtap='chatTap'>
+  <!-- <i-load-more tip="{{loadMoreText}}" loading="{{loadingMore}}" /> -->
+    <view class='chat-area' wx:for="{{chatDataList}}" wx:for-item="chatItem" wx:for-index="whatIndex" wx:key="whatIndex">
+      <view class='msg-time'>{{chatItem.sendTime}}</view>
+      <view class="{{chatItem.personType=='myPary' ? 'my-pary-box':'other-pary-box'}}">
+          <view class='person-ava' wx:if="{{chatItem.personType=='otherPary'}}">
+            <image wx:if="{{chatItem.personAva!='' && chatItem.personAva!=undefined}}" lazy-load="true" mode="scaleToFill" src='{{chatItem.personAva}}' />
+            <image wx:else lazy-load="true" mode="scaleToFill" src='/images/avatar_h.png' />
+          </view>
+          <view class='content-info'>
+            <view class='person-name'>{{chatItem.personName}}</view>
+            <view class='content'>
+              <view> <rich-text nodes="{{common.checkTextIsEmotion(chatItem.textContent,emotionData,emotionPath)}}"></rich-text> </view>
+              <view class='chat-img' wx:for="{{chatItem.imgListContent}}" wx:for-item="imgItem" ws:for-index="imgIndex" wx:key="img+imgItem" >
+                <image lazy-load="true" mode="widthFix" src='{{imgItem}}' />
+              </view>
+            </view>
+          </view>
+          <view class='person-ava' wx:if="{{chatItem.personType=='myPary'}}">
+            <image wx:if="{{chatItem.personAva!='' && chatItem.personAva!=undefined}}" lazy-load="true" mode="scaleToFill" src='{{chatItem.personAva}}' />
+            <image wx:else lazy-load="true" mode="scaleToFill" src='/images/avatar_h.png' />
+          </view>
+      </view>
+    </view>
+    <view class='bot-phd'></view>
+  </scroll-view>
+  <!-- 底部按钮 -->
+  <view class='footer-area'>
+    <view class='input-btn-area'>
+      <!-- <view class='input-box-type'>
+        <image lazy-load="true" mode="aspectFill" src='/images/chat/ll_keyboard.png' />
+      </view> -->
+      <view class='input-box'>
+        <input type='text' focus="{{sendFocus}}" value="{{inputText}}" confirm-hold bindinput="sendTextInput" bindfocus='sendInputFocus' bindblur='sendBlurFocus' type="text" confirm-type="send" bindconfirm="sendFirm"></input>
+      </view>
+      <view class='emotion-icon'>
+        <image lazy-load="true" mode="aspectFill" bindtap="emotionTap" src='/images/chat/ll_Expression.png' />
+      </view>
+      <view class='att-icon'>
+        <image lazy-load="true" mode="aspectFill" bindtap="attTap" src='/images/chat/ll_plus.png' />
+      </view>
+      <view class='send-button' bindtap="sendFirm">发送</view>
+    </view>
+  </view>
+  <!-- 表情包区域 -->
+  <view class='emotion-area' wx:if="{{showEmotionArea}}">
+    <swiper autoplay="{{eomAutoplay}}" indicator-dots="true" indicator-color="#DDDDDD" indicator-active-color="#CECECE" duration="500" class='emotion-swiper'>
+        <block wx:for="{{emotionList}}" wx:for-item="emoPageList" wx:for-index="emoPageIndex" wx:key="page+emoPageIndex" >
+          <swiper-item>
+              <i-row>
+                <i-col wx:for="{{emoPageList}}" wx:for-item="emoItem" wx:for-index="emoIndex" wx:key="emo+emoIndex" span="3" i-class="col-class"><image class='emo-img' lazy-load="true" mode="widthFix" src='{{emotionPath}}{{emoItem.name}}.png' bindtap='emoTap' data-name="{{emoItem.text}}"/></i-col>
+                <i-col span="3" i-class="col-class"><image class='emo-img' lazy-load="true" mode="widthFix" src='../../images/chat/emotion/delete.png' bindtap='emoDelTap'/></i-col>
+                <i-col span="3" i-class="col-class"><image class='emo-img' lazy-load="true" mode="widthFix" src='../../images/chat/ll_fasong.png' bindtap='sendFirm'/></i-col>
+            </i-row>
+          </swiper-item>
+        </block>
+      </swiper>
+  </view>
+  <!-- 附加功能区域 -->
+  <view class='att-area' wx:if="{{showAttArea}}">
+    <i-row>
+      <i-col span="4" i-class="col-class" bindtap="cameraTap">
+        <view class='grid-item'>
+          <view class='grid-icon'>
+            <image  src="/images/chat/ll_paizhao.png" lazy-load="true" mode="widthFix" />
+          </view>
+          <view class='grid-text'>相机</view>
+        </view>
+      </i-col>
+      <i-col span="4" i-class="col-class"  bindtap="albumTap">
+        <view class='grid-item'>
+          <view class='grid-icon'>
+            <image  src="/images/chat/ll_xiangce.png" lazy-load="true" mode="widthFix" />
+          </view>
+          <view class='grid-text'>相册</view>
+        </view>
+      </i-col>
+    </i-row>
+  </view>
+
+</view>

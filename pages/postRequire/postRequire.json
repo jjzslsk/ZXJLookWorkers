@@ -1,0 +1,9 @@
+{
+  "navigationBarTitleText": "发布需求",
+  "usingComponents": {
+    "i-switch": "/dist/switch/index",
+    "i-input": "/dist/input/index",
+    "payDialog": "/components/payDialog/payDialog",
+    "i-icon": "/dist/icon/index"
+  }
+}

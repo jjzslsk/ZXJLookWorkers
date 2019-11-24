@@ -1,0 +1,82 @@
+<!--pages/workerLogDetail/workerLogDetail.wxml-->
+<view class="body">
+  <scroll-view scroll-y class='scroll-area'>
+    <view class="bg-white padded-10">
+      <view class='aui-flex-col aui-flex-middle'>    
+        <view class="aui-flex-item-10">
+          <view class="log-title">{{detail.SUBJECT_TITLE}}</view>
+          <view class="log-date">{{detail.CRETAE_DATE}}</view>
+        </view>
+        <view class="aui-flex-item-2" bindtap="likeTap">
+          <image class="like-icon" src="/images/worker/log-like-act.png" wx:if="{{isLike=='1'}}"></image>
+          <image class="like-icon" src="/images/worker/log-like.png" wx:else></image>
+          <!-- <view class="like-text">收藏</view> -->
+        </view>
+      </view>
+      <view class="log-content">{{detail.SUBJECT_MEMO}}</view>
+      <view class='aui-flex-col aui-flex-middle padded-t-10' wx:if="{{detail.videoPath}}">    
+        <view class="aui-flex-item-12 log-img-item">
+          <video src="{{detail.videoPath}}"  controls ></video>
+        </view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle padded-t-10' wx:else>    
+        <view class="aui-flex-item-4 log-img-item" wx:for="{{detail.imgs}}" wx:for-item="li" wx:key="index">
+          <image class="log-img" mode='aspectFill' src="{{li}}" data-i="{{index}}" bindtap='previewImage'></image>
+        </view>
+      </view>
+
+      
+      <view class="view-count">浏览量{{detail.BROWSE_NUMBER}}</view>
+    </view>
+
+    <view class="bg-white padded-10 margin-t-10 padded-b-0 margin-b-10">
+      <view class="cmt-title bg-white">最新评论</view>
+      <view wx:if="{{cmtList.length>0}}">
+        <view class="aui-flex-col aui-flex-middle cmt-item" wx:for="{{cmtList}}" wx:for-item="li" wx:key="index">
+          <view class="aui-flex-item-2 padded-l-10">
+            <image class="cmt-avatar" src="/images/head.png"></image>
+          </view>
+          <view class="aui-flex-item-10 cmt-username">{{li.CLIENT_NAME}}</view>
+          <!-- <view class="aui-flex-item-2 cmt-like-count"></view>
+          <view class="aui-flex-item-1 padded-l-5">
+            <image class="cmt-like-icon" src="/images/worker/log-like.png"></image>
+          </view> -->
+          <view class="aui-flex-item-2"></view>
+          <view class="aui-flex-item-10 cmt-content">{{li.SUBJECT_MEMO}}</view>
+        </view>      
+      </view>
+      <view class='no-cmt' wx:else>
+        暂无评论
+      </view>
+    </view>  
+  </scroll-view>
+
+  <view class="aui-flex-col aui-flex-middle footer">
+    <view class="aui-flex-item-6">
+      <input class="cmt-input" placeholder="写评论..." disabled="true" bindtap="openCmt"></input>
+    </view>
+    <view class="aui-flex-item-2" bindtap="likeTap">
+      <image class="footer-icon" src="/images/worker/log-like-act.png" wx:if="{{isLike=='1'}}"></image>
+      <image class="footer-icon" src="/images/worker/log-like.png" wx:else></image>
+      <text class="footer-count">{{detail.DZ_NUM}}</text>
+    </view>
+    <view class="aui-flex-item-2" bindtap="openCmt">
+      <image class="footer-icon" src="/images/worker/log-cmt.png"></image>
+      <text class="footer-count">{{detail.HF_NUM}}</text>
+    </view>
+    <view class="aui-flex-item-2" bindtap='repostTap'>
+      <button open-type="share">
+        <image class="footer-icon" src="/images/worker/log-repost.png"></image>
+      </button>     
+    </view>
+  </view>
+
+  <view wx:if="{{openCmt}}">
+    <view class="cmtinput-mask" bindtap="hideCmt"></view>
+    <view class="cmtinput-bar">
+      <textarea placeholder='{{cmtPlaceholder}}' auto-height="true" bindinput="onInputChange" auto-focus="true"></textarea>
+      <view class="send-cmt" bindtap="comment">发送</view>
+    </view>    
+  </view>
+
+</view>

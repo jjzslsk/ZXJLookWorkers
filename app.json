@@ -1,0 +1,111 @@
+{
+  "pages": [         
+    "pages/index/index",
+    "pages/chooseLocation/chooseLocation",
+    "pages/ownerBBS/ownerBBS",
+    "pages/search/search",
+    "pages/postNote/postNote",
+    "pages/postStep/postStep",
+    "pages/postRequire/postRequire",
+    "pages/marketInfo/marketInfo",
+    "pages/orderDone/orderDone",
+    "pages/activity/activity",
+    "pages/activityList/activityList",
+
+    "pages/findWorker/findWorker",
+    "pages/workerType/workerType",
+    "pages/workerDetail/workerDetail",
+    "pages/chat/chat",
+    "pages/workerLogDetail/workerLogDetail",
+    "pages/workerLog/workerLog",
+    "pages/workerCmt/workerCmt",
+    "pages/mall/mall",
+
+    "pages/course/course",
+
+    "pages/me/me",
+    "pages/chatMessage/chatMessage", 
+    "pages/myOrders/myOrders",
+    "pages/orderDetail/orderDetail",
+    "pages/afterSale/afterSale",
+    "pages/wxSubscription/wxSubscription",
+    "pages/project/project",
+    "pages/myWorker/myWorker",
+    "pages/myShop/myShop",
+    "pages/addressMg/addressMg",
+    "pages/addAddress/addAddress",
+    
+    "pages/help/help",
+    "pages/usualQuestion/usualQuestion",
+    "pages/suggest/suggest",
+    "pages/suggestProRes/suggestProRes",
+
+    "pages/bindPhone/bindPhone",
+    "pages/bindLogin/bindLogin",   
+    "pages/agreement/agreement",
+
+    "pages/workerHome/workerHome",
+    "pages/workerApp/workerApp",   
+    "pages/complaintAdvice/complaintAdvice"
+  ],
+  "tabBar": {
+    "color": "#666666",
+    "selectedColor": "#41CC8E",
+    "backgroundColor": "#f8f8f8",
+    "borderStyle": "black",
+    "position": "bottom",
+    "list": [
+      {
+        "pagePath": "pages/index/index",
+        "text": "首页",
+        "iconPath": "images/home_icon2.png",
+        "selectedIconPath": "images/home_icon.png"
+      },
+      {
+        "pagePath": "pages/findWorker/findWorker",
+        "text": "附近工人",
+        "iconPath": "images/vicinity_icon2.png",
+        "selectedIconPath": "images/vicinity_icon.png"
+      },
+      {
+        "pagePath": "pages/mall/mall",
+        "text": "商城",
+        "iconPath": "images/shopping_icon2.png",
+        "selectedIconPath": "images/shopping_icon.png"
+      },
+      {
+        "pagePath": "pages/course/course",
+        "text": "装修学堂",
+        "iconPath": "images/school_icon2.png",
+        "selectedIconPath": "images/school_icon.png"
+      },
+      {
+        "pagePath": "pages/me/me",
+        "text": "我的",
+        "iconPath": "images/Mine_icon2.png",
+        "selectedIconPath": "images/Mine_icon.png"
+      }
+    ]
+  },
+  "networkTimeout": {
+    "request": 100000,
+    "downloadFile": 100000
+  },
+  "window": {
+    "backgroundTextStyle": "light",
+    "navigationBarBackgroundColor": "#41CC8E",
+    "navigationBarTitleText": "装小匠",
+    "navigationBarTextStyle": "white",
+    "backgroundColorTop": "#41CC8E",
+    "disableScroll": true
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "您的位置信息将用于小程序获取当前城市的工人信息"
+    }
+  },
+  "navigateToMiniProgramAppIdList": [
+    "wx4ae069d1473a78ce"
+  ],
+  "sitemapLocation": "sitemap.json"
+}

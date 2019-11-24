@@ -1,0 +1,6 @@
+/* pages/project/project.wxss */
+.body{width: 100%;height: 100vh;background: #F5F5F5;}
+.banner{width: 100%;height: 80px;}
+.grid-icon{width: 50px !important;height: 50px !important;}
+.grid{background: #FFFFFF;}
+.tab-head{margin-top: 10px;}

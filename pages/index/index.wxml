@@ -1,0 +1,101 @@
+<!--index.wxml-->
+<view class="body">
+  <view class='aui-flex-col aui-flex-middle banner'> 
+    <view class='aui-flex-item-9' bindtap='openSearch'>
+      <view class="col-icon" hover-class="none" hover-stop-propagation="false">
+        <icon class="searchcion" size='14' type='search'></icon>
+      </view>
+      <view class='search'>请输入工种进行搜索</view>
+    </view>     
+    <view class='aui-flex-item-3 location' bindtap='onLocationTap'>
+      <i-icon type="coordinates_fill" size="22" color="#F8F8FF" />{{locationName}}
+    </view>
+  </view>
+  <scroll-view scroll-y class='scroll-area'> 
+
+  <swiper
+    class="banner-swiper"
+    indicator-dots="{{indicatorDots}}"
+    autoplay="{{autoplay}}"
+    interval="{{interval}}"
+    duration="{{duration}}"
+    indicator-color="#41CC8E"
+  >
+    <block wx:for="{{bannerList}}" wx:for-item="banner" wx:key="index">
+      <swiper-item class="banner-swiper" bindtap="openActivity" data-id="{{banner.W_ACT_ID}}">
+        <image src="{{banner.IMG_URL}}" class="slide-image"/>
+      </swiper-item>
+    </block>
+  </swiper>
+  
+  <view class="activity">
+    <view class='aui-flex-col aui-flex-middle activity-title'>
+      <view class="aui-flex-item-9">装小匠优选服务</view>
+      <view class="aui-flex-item-3 more" bindtap="moreActivity">更多 ></view>
+    </view>
+  
+    <view class='aui-flex-col'>
+      <view class="aui-flex-item-4 padded-5 padded-l-0">
+          <image class="activity-image1" src="{{activityList[0].IMG_URL}}" data-id="{{activityList[0].W_ACT_ID}}" bindtap="openActivity"></image>    
+      </view>
+      <view class="aui-flex-item-8">
+        <view class="aui-flex-item-6 padded-t-5 padded-b-0  padded-r-5">
+          <image class="activity-image2" src="{{activityList[1].IMG_URL}}" data-id="{{activityList[1].W_ACT_ID}}" bindtap="openActivity"></image>
+        </view>
+        <view class="aui-flex-item-6 padded-t-5 padded-b-0">
+          <image class="activity-image2" src="{{activityList[2].IMG_URL}}" data-id="{{activityList[2].W_ACT_ID}}" bindtap="openActivity"></image>
+        </view>
+        <view class="aui-flex-item-4 padded-r-5">
+          <image class="activity-image2" src="{{activityList[3].IMG_URL}}" data-id="{{activityList[3].W_ACT_ID}}" bindtap="openActivity"></image>
+        </view> 
+        <view class="aui-flex-item-4 padded-r-5">
+          <image class="activity-image2" src="{{activityList[4].IMG_URL}}" data-id="{{activityList[4].W_ACT_ID}}" bindtap="openActivity"></image>
+        </view>
+        <view class="aui-flex-item-4">
+          <image class="activity-image2" src="{{activityList[5].IMG_URL}}" data-id="{{activityList[5].W_ACT_ID}}" bindtap="openActivity"></image>
+        </view>
+      </view>  
+    </view>
+  </view>
+  <view class='item-list'>
+    <view class='items' wx:for="{{classList}}" wx:for-item="classItem" wx:key="classIndex" wx:if="{{index==0}}">
+      <view class='item-title'>{{classItem.CLASS_NAME}}</view>
+      <view class='aui-flex-col item-child'>
+        <view class='aui-flex-item-25' wx:for="{{classItem.child}}" wx:for-item="childItem" wx:key="childIndex" data-pid="{{classItem.CLIENT_CLASS_ID}}" data-pname="{{classItem.CLASS_NAME}}" data-id="{{childItem.CLIENT_CLASS_ID}}" data-name="{{childItem.CLASS_NAME}}" bindtap='openClassDetail'>
+          <image class='class-icon' src="{{childItem.CLASS_ICON}}" wx:if="{{childItem.CLASS_ICON}}"/>
+          <image class='class-icon' src="/images/placeholder.png" wx:else/>
+          <view class='class-name'>{{childItem.CLASS_NAME}}</view>
+        </view>
+      </view>      
+    </view>
+
+    <view class='view_notice_contain'>
+      <!-- <i-icon type="systemprompt" size='20' color='#259b24' /> -->
+      <text class='Orders'>附近订单：</text>
+      <swiper class="swiper_container" vertical="true" autoplay="true" circular="true" simulateTouch="true" interval="4000">
+        <block wx:for="{{noteList}}" wx:for-item="li" wx:key="order_number">
+          <swiper-item>
+            <view class="swiper_item" data-id="{{li.work_demaed_id}}" data-status="{{li.work_status}}" bindtap='onBannerOrderTap'>         
+                <text wx:for="{{li.classify}}" wx:for-item="cli" wx:key="ROWID">{{cli.name}}，</text>
+                <text>{{li.plan_start_date}}，</text>
+                <text>{{li.work_address}}</text>
+            </view>
+          </swiper-item>
+        </block>
+      </swiper>
+    </view>
+
+    <view class='items' wx:for="{{classList}}" wx:for-item="classItem" wx:key="classIndex" wx:if="{{index>0 && classItem.CLASS_NAME!='平台活动'}}">
+      <view class='item-title'>{{classItem.CLASS_NAME}}</view>
+      <view class='aui-flex-col item-child'>
+        <view class='aui-flex-item-25' wx:for="{{classItem.child}}" wx:for-item="childItem" wx:key="childIndex" data-pid="{{classItem.CLIENT_CLASS_ID}}" data-pname="{{classItem.CLASS_NAME}}" data-id="{{childItem.CLIENT_CLASS_ID}}" data-name="{{childItem.CLASS_NAME}}" bindtap='openClassDetail'>
+          <image class='class-icon' src="{{childItem.CLASS_ICON}}" wx:if="{{childItem.CLASS_ICON}}"/>
+          <image class='class-icon' src="/images/placeholder.png" wx:else/>
+          <view class='class-name'>{{childItem.CLASS_NAME}}</view>
+        </view>
+      </view>      
+    </view>
+  </view>
+  
+  </scroll-view>
+</view>

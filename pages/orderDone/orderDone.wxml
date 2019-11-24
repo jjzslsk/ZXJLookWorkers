@@ -1,0 +1,76 @@
+<!--pages/orderDone/orderDone.wxml-->
+<view class='body'>
+  <scroll-view scroll-y class='scroll-area'>
+    <view class='aui-flex-col aui-flex-middle'>
+      <view class='aui-flex-item-3'>
+      </view>
+      <view class='aui-flex-item-2'>
+        <image class='done-img' mode="widthFix" src='/images/post/done.png'></image>
+      </view>
+      <view class='aui-flex-item-7 done-tips'>订单已提交！</view>
+    </view>
+    <view class='order-info'>
+      <view>订单编号：<text class='cl-org'>{{orderNumber}}</text></view>
+    </view>
+    <view class='step-info'>
+      <view class='aui-flex-col aui-flex-middle padding-0'>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step1.jpg'></image>
+        </view>
+        <view class='flex-item-arrow'>
+          <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+        </view>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step2.jpg'></image>
+        </view>
+        <view class='flex-item-arrow'>
+          <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+        </view>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step3.jpg'></image>
+        </view>
+        <view class='flex-item-arrow'>
+          <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+        </view>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step4.jpg'></image>
+        </view>
+        <view class='flex-item-arrow'>
+          <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+        </view>
+        <view class='flex-item-step'>
+          <image class='step-img' mode="widthFix" src='/images/post/step5.jpg'></image>
+        </view>
+      </view>
+      <view class='aui-flex-col aui-flex-middle padding-0'>
+        <view class='flex-item-step padding-0'>发布需求</view>
+        <view class='flex-item-arrow'></view>
+        <view class='flex-item-step padding-0'>工匠报价</view>
+        <view class='flex-item-arrow'></view>
+        <view class='flex-item-step padding-0'>选择工匠</view>
+        <view class='flex-item-arrow'></view>
+        <view class='flex-item-step padding-0'>现场施工</view>
+        <view class='flex-item-arrow'></view>
+        <view class='flex-item-step padding-0'>服务评价</view>
+      </view>
+    </view>
+
+    <view class='content'>
+      <view class='title'>注意：</view>
+      <view class='margin-b-10'>1、该订单已发布，工匠师傅可在发布后48小时以内报价，请您耐心等候，或者您直接邀约工匠师傅进行沟通。</view>
+      <view class='margin-b-10'>2、请您在工匠师傅报价时间截止后24小时内选择报价。</view>
+      <view class='margin-b-10'>3、您在选择报价前可以随时取消订单。</view>
+      <view>4、选择确认报价后取消订单，将扣取50元服务费（夜间服务21:00 - 6:00将扣取80元）。</view>
+    </view>
+
+    <view class='aui-flex-col aui-flex-middle'>
+      <view class='aui-flex-item-6 btn'>
+        <view class='confirm-btn' bindtap='postMore'>返回首页</view>
+      </view>
+      <view class='aui-flex-item-6 btn'>
+        <view class='confirm-btn check-order' bindtap='openDetail'>查看订单</view>
+      </view>
+    </view>
+  </scroll-view>  
+</view>
+

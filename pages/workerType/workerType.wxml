@@ -1,0 +1,31 @@
+<!--pages/workerType/workerType.wxml-->
+<view class='body-bkg'> 
+  <view>
+    <view class='info-title'>
+      <scroll-view scroll-y class='scroll-area'>
+        <view wx:for="{{firstClassList}}" wx:for-item="leftItem" wx:key="classIndex" bindtap="switchClass" wx:for-index="classIndex" data-index="{{classIndex}}" wx:if="{{leftItem.CLASS_NAME!='平台活动'}}">
+          <view class='info-title-item info-title-item-act' wx:if="{{classIndex==curFirstClass.index}}">
+            <view class='info-title-content info-title-content-act'>{{leftItem.CLASS_NAME}}</view>
+          </view>
+          <view class='info-title-item' wx:else>
+            <view class='info-title-content'>{{leftItem.CLASS_NAME}}</view>
+          </view>
+        </view>
+        
+      </scroll-view>
+    </view>
+    <view class='info-content'>
+      <scroll-view scroll-y class='scroll-area'>
+        <view class='items'>
+          <view class='aui-flex-col'>
+            <view class='aui-flex-item-4 margin-b-15' wx:for="{{secondClassList}}" wx:for-item="rightItem" bindtap="rightItemTap" wx:key="CLIENT_CLASS_ID" data-id="{{rightItem.CLIENT_CLASS_ID}}" data-icon="{{rightItem.CLASS_ICON}}" data-name="{{rightItem.CLASS_NAME}}">
+              <image class='class-icon' src="{{rightItem.CLASS_ICON}}" wx:if="{{rightItem.CLASS_ICON}}"/>
+              <image class='class-icon' src="/images/placeholder.png" wx:else/>
+              <view class='class-name'>{{rightItem.CLASS_NAME}}</view>
+            </view>
+          </view>      
+        </view>   
+      </scroll-view>
+    </view>
+  </view>
+</view>

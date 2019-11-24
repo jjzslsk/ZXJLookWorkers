@@ -1,0 +1,41 @@
+<!--components/payDialog/payDialog.wxml-->
+<!-- 选择支付方式 -->
+<!--屏幕背景变暗的背景 -->
+<view class="pay-choose-popup-bg" bindtap="colsePayMethod" hover-class="item-click-sel-bg" wx:if="{{showPayMethodPopup}}"></view>
+<!--弹出框 -->
+<view class="pay-choose-popup-list" animation="{{animationData}}" wx:if="{{showPayMethodPopup}}">
+  <view class='pay-popup-head'>
+    <view bindtap="colsePayMethod" hover-class="item-click-sel-bg">
+      <i-icon type="return" size="25" color="#000000" />
+    </view>
+    <view>选择支付方式</view>
+    <view bindtap="confirmPayMethod" hover-class="item-click-sel-bg">确定</view>
+  </view>
+  <view class='pay-popup-list'>
+  <radio-group class="radio-group">
+    <label class='pay-popup-list-item' wx:for="{{payMethodList}}" wx:for-item="payMethodItem" wx:for-index="index" wx:key="index" bindtap='choosePay' hover-class="item-click-sel-bg" data-id="{{payMethodItem.id}}" data-isclick="{{payMethodItem.isClick}}" data-index="{{index}}">
+      <view class="{{payMethodItem.isClick?'pay-item-title':'pay-item-title-disable'}}">
+        <image lazy-load="true" mode="widthFix" src='{{payMethodItem.icon}}' />
+        <text>{{payMethodItem.name}}</text><text class='balance' wx:if="{{payMethodItem.balance !=''}}">¥{{payMethodItem.balance}}</text><text wx:if="{{payMethodItem.balanceHint !=''}}">{{payMethodItem.balanceHint}}</text>
+      </view>
+      <!-- <view wx:if="{{payMethodItem.isCheck}}">
+        <i-icon type="right" size="20" color="#259b24" />
+      </view> -->
+    <radio disabled="{{!payMethodItem.isClick}}" checked="{{payMethodItem.isCheck}}"/>
+    </label>
+    </radio-group>
+  </view>
+</view>
+<i-modal title="" visible="{{ balVisible }}" bind:ok="handleOk" bind:cancel="handleClose">
+  <view wx:if="{{phone.length>0}}"></view>
+  <view wx:else style='color:red'>获取不到手机号</view>
+  <view class='thePhone'>{{thePhone}}</view>
+  <view class='input-item'>
+    <view class='input-area'>
+      <input bindinput="bindSmsCodeInput" value="{{smsCode}}" type='number' maxlength='4' placeholder="请输入验证码" />
+    </view>
+    <view class="{{disabledSmsCode ? 'dget-sms-code-null':'get-sms-code'}}" bindtap='getSmsCodeTap'>
+      <text class="{{disabledSmsCode ? 'disabled-sms-code':''}}">{{smsCodeHint}}</text>
+    </view>
+  </view>
+</i-modal>

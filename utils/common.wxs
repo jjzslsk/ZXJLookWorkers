@@ -1,0 +1,36 @@
+/**过滤器*/
+var hideBankNum = function (bankNum) {
+  if (bankNum == undefined || bankNum == null || bankNum == '' || bankNum.length<4){
+    return bankNum;
+  } else{
+    var bankEnd = bankNum.substring(bankNum.length - 4, bankNum.length);
+    return "**** **** **** " + bankEnd
+  }
+};
+
+var checkTextIsEmotion = function (emoMsg, emotionList,path){
+  //检查是否有表情字符，有则转成表情图片
+  var emoPath, transMsg;
+  var reg = getRegExp("\[(.*?)\]", "gm");
+  transMsg = emoMsg.replace(reg, function (match) {
+    var len = emotionList.length;
+    for (var i = 0; i < len; i++) {
+      if (emotionList[i].text === match) {
+        emoPath = path + emotionList[i].name + '.png';
+        return '<img class="chat-emo"  src = "' + emoPath + '" />'
+      }
+    }
+    return match;
+  });
+  return transMsg ;
+};
+
+var timeTodata=function(str) {
+  return str.length > 0 ? str.split(" ")[0] : ''; // yyyy-MM-dd
+};
+
+module.exports = {
+  hideBankNum: hideBankNum,
+  checkTextIsEmotion: checkTextIsEmotion,
+  timeTodata: timeTodata
+};

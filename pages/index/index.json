@@ -1,0 +1,17 @@
+{
+  "navigationBarTitleText": "发布需求",
+  "usingComponents": {
+    "i-tab-bar": "/dist/tab-bar/index",
+    "i-tab-bar-item": "/dist/tab-bar-item/index",
+    "i-grid": "/dist/grid/index",
+    "i-grid-item": "/dist/grid-item/index",
+    "i-grid-icon": "/dist/grid-icon/index",
+    "i-grid-label": "/dist/grid-label/index",
+    "i-icon": "/dist/icon/index"
+  },
+  "permission": {
+    "scope.userLocation": {
+      "desc": "你的位置信息将用于获取附近工人信息"
+    }
+  }
+}

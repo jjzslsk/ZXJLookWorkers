@@ -1,0 +1,53 @@
+/* pages/login/login.wxss */
+.body-bg {
+  background-color: #FFFFFF;
+  width: 100%;
+  height: 100vh;
+}
+
+.user-ave {
+  text-align: center;
+  padding: 20px 0;
+}
+
+.user-ave image {
+  width: 30%;
+}
+
+.title-hint{
+  text-align: center;
+  color: #AAAAAA;
+}
+
+.wx-bind-item{
+  margin: 20px 10% 0 10%;
+  background-color: #259b24;
+  text-align: center;
+  color: #FFFFFF;
+  height: 40px;
+  line-height: 40px;
+  max-height: 40px;
+  border-radius: 8px;
+}
+
+.submit-btn-sel-bg{
+  height: 100%;
+  border-radius: 8px;
+}
+
+.phone-bind-item{
+  margin: 20px 10% 0 10%;
+  background-color: #FFFFFF;
+  text-align: center;
+  color: #000000;
+  height: 40px;
+  line-height: 40px;
+  max-height: 40px;
+  border: 1px solid #000000;
+  border-radius: 8px;
+}
+
+.item-click-sel-bg{
+  height: 100%;
+  border-radius: 8px;
+}

@@ -1,0 +1,81 @@
+<view class="body">
+  <scroll-view scroll-y class='scroll-area'>
+    <view class='base-info'>
+      <image bindtap='userImg' class='avatar' show-menu-by-longpress='true' src='{{detail.AVATAR}}' wx:if="{{detail.AVATAR}}" />
+      <image class='avatar' src='/images/head.png' wx:else />
+      <view class='username' wx:if="{{detail.CLIENT_ACCOUNT}}">{{detail.CLIENT_ACCOUNT}}</view>
+      <view class='username' wx:else>
+        <text decode="{{true}}">&nbsp;梁师傅</text>
+      </view>
+      <view class='user-box'>
+        <view class="user-box-item">
+          <view>
+            <i-icon type="addressbook_fill" />
+            <text decode="{{true}}">实名认证</text>
+          </view>
+          <text decode="{{true}}">已认证</text>
+        </view>
+        <view class="user-box-item">
+          <view>
+            <i-icon type="addressbook_fill" />
+            <text decode="{{true}}">工匠等级</text>
+          </view>
+          <text decode="{{true}}">一级工匠</text>
+        </view>
+        <view class="user-box-item">
+          <view>
+            <i-icon type="addressbook_fill" />
+            <text decode="{{true}}">活跃天数</text>
+          </view>
+          <text decode="{{true}}">15天</text>
+        </view>
+        <view class="user-box-item">
+          <view>
+            <i-icon type="addressbook_fill" />
+            <text decode="{{true}}">关&nbsp;&nbsp;&nbsp;&nbsp;注</text>
+          </view>
+          <text decode="{{true}}">120人</text>
+        </view>
+      </view>
+    </view>
+    <view class='info-title'>
+      <view class='info-title-content'>个人简介</view>
+    </view>
+    <view class='info-content'>男 | 35岁 | 水电 | 砌墙 | 木工</view>
+    <view class='info-content'>本人从事家装工装18年，擅长砌墙，水电木工等等</view>
+    <view class='info-title'>
+      <view class='info-title-content'>个性签名</view>
+    </view>
+    <view class='info-content'>我是装小匠，我为我代言！</view>
+    <view class='info-title'>
+      <view class='info-title-content'>个人相册</view>
+    </view>
+    <view class='info-content'>
+      <view class="info-content-wrap" hover-class="none" hover-stop-propagation="false">
+        <view class="info-img">
+          <image src="{{infoImg}}" mode="scaleToFill"/>
+          <image src="{{infoImg}}" mode="scaleToFill"/>
+          <image src="{{infoImg}}" mode="scaleToFill"/>
+          <!-- <image src="{{infoImg}}" mode="scaleToFill"/> -->
+        </view>
+        <view class="info-img-icon" hover-class="none" hover-stop-propagation="false">
+          <i-icon type="enter" />
+        </view>
+      </view>
+    </view>
+    <view class='info-title'>
+      <view class='info-title-content'>工匠日志</view>
+    </view>
+    <view class='info-content'>标题：荣和山水绿城1-105工地</view>
+    <view class='info-content'>
+      <view class="info-content-list" hover-class="none" hover-stop-propagation="false">
+        <view class="info-content-list-l" hover-class="none" hover-stop-propagation="false">
+          <image class="" src="{{infoImg}}" />
+        </view>
+        <view class="info-content-list-r" hover-class="none" hover-stop-propagation="false">
+          <view class="list-text">今天的成果！今天的成果！ 今天的成果！ 今天的成果！今天的成果！今天的成果！ 今天的成果！ 今天的成果！今天的成果！今天的成果！ 今天的成果！ 今天的成果！</view>
+        </view>
+      </view>
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,10 @@
+{
+  "navigationBarTitleText": "选择城市",
+  "usingComponents": {
+    "i-icon": "/dist/icon/index",
+    "i-row": "/dist/row/index",
+    "i-col": "/dist/col/index",
+    "i-index": "/dist/index/index",
+    "i-index-item": "/dist/index-item/index"
+  }
+}

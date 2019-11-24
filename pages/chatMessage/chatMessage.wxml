@@ -1,0 +1,32 @@
+<!--pages/chatMessage/chatMessage.wxml-->
+<wxs module="common" src="../../utils/common.wxs"></wxs>
+<view class='body-bg '>
+  <scroll-view scroll-y class="scroll-area">
+    <view wx:if="{{msgDataList.length>0}}">
+      <view class='msg-item' wx:for="{{msgDataList}}" wx:for-item="msgItem" wx:for-index="msgIndex" wx:key="msg+msgIndex" bindtap='msgItemTap' data-position='{{msgIndex}}' data-obj="{{msgItem.otherPayInfo}}" data-id="{{msgItem.otherPayInfo.otherPayId}}" data-name="{{msgItem.otherPayInfo.otherPayName}}" bind:longpress="onListLongpress">
+        <view class='item-ava'>
+          <image wx:if="{{msgItem.otherPayInfo.otherPayAva!=undefined && msgItem.otherPayInfo.otherPayAva.length>0}}" lazy-load="true" src='{{msgItem.otherPayInfo.otherPayAva}}' />
+          <image wx:else lazy-load="true"  src='../../images/avatar_h.png' />
+        </view>
+        <view class='item-info'>
+          <view class='item-name'>
+            <view class='name ellipsis-1'>{{msgItem.otherPayInfo.otherPayName}}</view>
+            <view class='time'>{{common.timeTodata(msgItem.lastChat.sendTime)}}</view>
+          </view>
+          <view class='item-msg'>
+            <view class='msg'>
+              <text wx:if="{{msgItem.lastChat.imgListContent.length>0}}">[图片]</text>
+              <text wx:else>{{msgItem.lastChat.textContent}}</text>
+            </view>
+            <view class='msg-tip' wx:if="{{msgItem.otherPayInfo.unreadCount!=undefined && msgItem.otherPayInfo.unreadCount>0}}">
+              <text>{{msgItem.otherPayInfo.unreadCount}}</text>
+            </view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view wx:else style="margin:0.5rem auto 0 auto;text-align: center;">
+      暂无消息
+    </view>
+  </scroll-view>
+</view>

@@ -1,0 +1,98 @@
+/* pages/addressMg/addressMg.wxss */
+.body-bg {
+  background-color: #f5f5f5;
+  width: 100%;
+  height: 100vh;
+}
+
+.scroll-area-def {
+  height:calc(100% - 37px);
+}
+
+.scroll-area-choose {
+  height: calc(100% - 82px);
+}
+
+.add-btn{
+  background-color: #41CC8E;
+  color: #FFFFFF;
+  height: 37px;
+  line-height: 37px;
+  max-height: 37px;
+  text-align: right;
+  padding: 0 10px;
+}
+
+.address-list{
+  padding: 8px 10px;
+  background-color: #FFFFFF;
+  margin-bottom: 10px;
+}
+
+.address-list .address-item{
+  display: flex;
+}
+
+.address-list .address-item .choose-address-raido{
+  display: flex;
+  margin-top: 10px;
+  margin-right: 10px;
+}
+
+.address-list .address-item .choose-address-raido image{
+  width: 2rem;
+  height: 2rem;
+}
+.address-list .address-item .address-content{
+  width: 100%;
+}
+.address-list .address-item .address-content .user-name-phone{
+  display: flex;
+  justify-content: space-between;
+}
+
+.address-list .address-item .address-content .address{
+  margin-top: 8px;
+  padding-bottom: 8px;
+  border-bottom: 1rpx solid #DDDDDD;
+}
+
+.address-list .address-item .address-content .item-footer{
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  line-height: 40px;
+  max-height: 40px;
+}
+
+.address-list .address-item .address-content .item-footer .set-def,.address-list .item-footer .item-del{
+  display: flex;
+  align-items: center;
+}
+
+.address-list .address-item .address-content .item-footer .set-def image{
+  width: 30px;
+  height: 30px;
+  margin-right:8px;
+}
+
+.address-list .address-item .address-content .item-footer .item-del image{
+  width: 24px;
+  height: 24px;
+  margin-right:8px;
+}
+
+.confirm-address{
+  background-color: #259b24;
+  color: #FFFFFF;
+  height: 39px;
+  line-height: 39px;
+  max-height: 39px;
+  text-align: center;
+  border-radius: 19px;
+  margin: 3px 10%;
+}
+
+.footer-hint view{
+   background: #f5f5f5;
+}

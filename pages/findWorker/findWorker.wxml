@@ -1,0 +1,168 @@
+<view class='body'>
+<view class='page-content' wx:if="{{showType=='map'}}">
+  <view class='classify'>
+    <view class='aui-flex-col'>
+      <view class='aui-flex-item-25 margin-b-15' wx:for="{{secondClassList}}" wx:for-item="rightItem" wx:key="CLIENT_CLASS_ID" bindtap="classItemTab" data-id="{{rightItem.CLIENT_CLASS_ID}}" data-icon="{{rightItem.CLASS_ICON}}" data-name="{{rightItem.CLASS_NAME}}" wx:if="{{index<9}}">
+        <view class='class-item class-item-act' wx:if="{{pickedClass==rightItem.CLIENT_CLASS_ID}}">
+          <image class='class-icon' src="{{rightItem.CLASS_ICON}}" wx:if="{{rightItem.CLASS_ICON}}"/>
+          <image class='class-icon' src="/images/placeholder.png" wx:else/>
+          <view class='class-name'>{{rightItem.CLASS_NAME}}</view>
+        </view>
+        <view class='class-item' wx:else>
+          <image class='class-icon' src="{{rightItem.CLASS_ICON}}" wx:if="{{rightItem.CLASS_ICON}}"/>
+          <image class='class-icon' src="/images/placeholder.png" wx:else/>
+          <view class='class-name'>{{rightItem.CLASS_NAME}}</view>
+        </view>
+      </view>
+      <view class='aui-flex-item-25 margin-b-15' bindtap='moreType'>
+        <view class='class-item'>
+          <image class='class-icon' src="/images/worker/gd.png"/>
+          <view class='class-name'>更多</view>
+        </view>
+      </view>
+    </view>
+  </view>
+  <!-- <view class="" hover-class="none" hover-stop-propagation="false"> -->
+      <map
+    id="map"
+    longitude="{{longitude}}"
+    latitude="{{latitude}}"
+    scale="{{scale}}"
+    markers="{{markers}}"
+    bindmarkertap="markertap"
+    bindcallouttap="callouttap"
+    show-location
+    style="width: 100%; height:calc(100% - 185px);position: fixed;top: 185px;z-index: 10;">
+    </map>
+  <!-- </view> -->
+</view>
+<view class='page-content' wx:if="{{showType=='list'}}">
+  <view class='classify2'>
+    <view class='classify2-item classify2-active' bindtap='moreType'>{{pickedClassName}} ></view>
+    <!-- <view class='{{curSort=="all" ? "classify2-item classify2-active":"classify2-item"}}' data-type="all" bindtap='onSortTab'>综合排序</view> -->
+    <view class='{{curSort=="distance" ? "classify2-item classify2-active":"classify2-item"}}' data-type="distance" bindtap='onSortTab'>距离</view>  
+    <view class='{{curSort=="score" ? "classify2-item classify2-active":"classify2-item"}}' data-type="score" bindtap='onSortTab'>评价</view>   
+  </view>
+  <view class='filter' wx:if="{{showFilter}}">
+    <view class='filter-item-left'>性别
+      <text class='filter-text'>男</text>
+    </view>
+    <view class='filter-item-right'>年龄
+      <text class='filter-text'>32</text>
+    </view>
+    <view class='filter-item-left'>价格
+      <text class='filter-text'>300元/天</text>
+    </view>
+    <view class='filter-item-right'>距离
+      <text class='filter-text'>500m</text>
+    </view>
+    <view class='filter-item'>评价
+      <view class='score'>
+        <image src='/images/worker/star_red.png'></image>
+        <image src='/images/worker/star_red.png'></image>
+        <image src='/images/worker/star_red.png'></image>
+        <image src='/images/worker/star_red.png'></image>
+        <image src='/images/worker/star_red.png'></image>
+      </view>
+    </view>
+  </view>
+  
+  <scroll-view scroll-y class='scroll-area'>  
+    <view class='worker-list'>
+      <view class='aui-flex-col aui-flex-middle border-b' data-id="{{li.userId}}" bindtap='openWorkerDetail' wx:key="" wx:for="{{workerList}}" wx:for-item="li">
+        <view class='aui-flex-item-3'>
+          <image class='list-user-avatar' src='{{li.avatar}}' wx:if="{{li.avatar}}"></image>
+          <image class='list-user-avatar' src='/images/head.png' wx:else></image>
+        </view>
+        <view class='aui-flex-item-9'>
+          <view>{{li.shortName}}</view>
+          <view class='post-time'>
+            <text class='user-text'>{{li.sexName}}</text>
+            <text class='user-text border-l'>{{li.age}}岁</text>
+            <text class='user-text border-l'>{{li.seniority}}年工龄</text>
+            <text class='user-text border-l' wx:if="{{li.workerGoodReputation && li.workerGoodReputation>0}}">{{li.workerGoodReputation*100}}%好评</text>
+            <text class='distance' wx:if="{{li.distance}}">{{li.distance}}km</text>
+          </view>
+          <view class='motto aui-ellipsis-1' wx:if="{{li.motto}}">{{li.motto}}</view>
+        </view>
+        
+      </view>
+
+      <!-- <view class='list-item' data-id="{{li.userId}}" bindtap='openWorkerDetail' wx:key="" wx:for="{{workerList}}" wx:for-item="li">
+        <view class='list-user'>
+          <image class='list-user-avatar' src='{{li.avatar}}' wx:if="{{li.avatar}}"></image>
+          <image class='list-user-avatar' src='/images/head.png' wx:else></image>
+          <view class='list-user-text'>
+            <view class='username'>{{li.shortName}}
+              <view class='list-score'>
+                <image src='/images/worker/star_red.png' wx:key="{{starLevel}}" wx:for="{{li.WORKER_SCORE}}"></image>
+              </view>
+            </view>
+            <view class='post-time'>
+              <text class='user-text border-r'>{{li.sexName}}</text>
+              <text class='user-text border-r'>{{li.age}}岁</text>
+              <text class='user-text border-r'>{{li.seniority}}年工龄</text>
+              <text class='pj' wx:if="{{li.workerGoodReputation && li.workerGoodReputation>0}}">{{li.workerGoodReputation*100}}%好评</text>
+              <text class='distance' wx:if="{{li.distance}}">{{li.distance}}km</text>
+            </view>
+            <view class='motto aui-ellipsis-1'>{{li.motto}}</view>
+            <view></view>
+          </view>
+        </view>
+      </view>       -->
+
+      
+
+    </view>
+
+    <!-- <view class='worker-list' wx:else>
+      <view class='list-item' data-id="{{li.CLIENT_ID}}" bindtap='openWorkerDetail' wx:key="" wx:for="{{list}}" wx:for-item="li">
+        <view class='list-user'>
+          <image class='list-user-avatar' src='{{li.AVATAR}}' wx:if="{{li.AVATAR}}"></image>
+          <image class='list-user-avatar' src='/images/head.png' wx:else></image>
+          <view class='list-user-text'>
+            <view class='username'>{{li.shortName}}
+              <view class='list-score'>
+                <image src='/images/worker/star_red.png' wx:key="{{starLevel}}" wx:for="{{li.WORKER_SCORE}}"></image>
+              </view>
+            </view>
+            <view class='post-time'>
+              <text class='user-text border-r'>{{li.sexName}}</text>
+              <text class='user-text'>{{li.age}}岁</text>
+              <text class='distance'></text>
+            </view>
+            <view class='price'><text class='pj' wx:if="{{li.WORKER_GOOD_REPUTATION && li.WORKER_GOOD_REPUTATION>0}}">{{li.WORKER_GOOD_REPUTATION*100}}%好评</text></view>
+          </view>
+        </view>
+      </view>      
+    </view> -->
+
+    <!-- <view class='worker-list'>
+      <view class='list-item' data-id="{{li.userId}}" bindtap='openWorkerDetail' wx:key="" wx:for="{{workerList}}" wx:for-item="li">
+        <view class='list-user'>
+          <image class='list-user-avatar' src='{{li.avatar}}' wx:if="{{li.avatar}}"></image>
+          <image class='list-user-avatar' src='/images/head.png' wx:else></image>
+          <view class='list-user-text'>
+            <view class='username'>{{li.shortName}}
+              <view class='list-score'>
+                <image src='/images/worker/star_red.png' wx:key="{{starLevel}}" wx:for="{{li.WORKER_SCORE}}"></image>
+              </view>
+            </view>
+            <view class='post-time'>
+              <text class='user-text border-r'>{{li.sexName}}</text>
+              <text class='user-text'>{{li.age}}岁</text>
+              <text class='distance'></text>
+            </view>
+            <view class='price'><text class='pj' wx:if="{{li.workerGoodReputation && li.workerGoodReputation>0}}">{{li.workerGoodReputation*100}}%好评</text></view>
+          </view>
+        </view>
+      </view>      
+    </view>   -->
+    <view class='list-tips'>已加载完成</view>
+  </scroll-view>
+</view>
+</view>
+<cover-image class='switch-btn' src="/images/worker/type-list.png" bindtap='openWorkerList' wx:if="{{showType=='map'}}"></cover-image>
+<cover-image class='switch-btn' src="/images/worker/type-map.png" bindtap='openWorkerList' wx:if="{{showType=='list'}}"></cover-image>
+<cover-image class='location-btn' src="/images/worker/location.png" bindtap='myLocation' wx:if="{{showType=='map'}}"></cover-image>
+<!-- <cover-image class='require-btn' src="/images/worker/post-require.jpg" bindtap='postRequire'></cover-image> -->

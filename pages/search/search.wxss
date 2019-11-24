@@ -1,0 +1,26 @@
+/* pages/search/search.wxss */
+@import "../../utils/flex.wxss";
+.body{width: 100%;height: 100vh;background: #F1F1F1;}
+.scroll-area {height:calc(100% - 50px);padding: 10px;box-sizing:border-box;}
+.search-bar{height: 50px;background: #41CC8E;box-sizing:border-box;}
+.search-input-bar{padding:0 15px;box-sizing:border-box;}
+.search-input{background: #FFFFFF;border-radius: 50px;font-size: 0.8em;padding:0 15px;box-sizing:border-box;height: 30px;padding-right: 25px;}
+.search-btn{font-size: 0.8em;padding-left: 10px;color: #FFFFFF;box-sizing:border-box;}
+
+.item-title{padding: 0 0 10px 0;font-size: 0.9em;color: #41CC8E;}
+.label-text{font-size: 0.7em !important;}
+.more-tips{font-size: 0.8em;color: #999999;position: absolute;right: 30px;margin-top: 3px;}
+.item-list{width: 100%;}
+.aui-flex-item-25 {float: left;width: 20%;padding: 2px 0 !important;box-sizing:border-box;}
+.class-icon{width:40px;height: 40px;margin-left:calc(50% - 20px);position: relative;border-radius: 50%;border:3px #DDDDDD solid;box-sizing:border-box;}
+.class-name{text-align: center;font-size: 0.7em;margin-top: 0.5px;}
+.item-child{background: #FFFFFF;border-radius: 5px; border-bottom: -5px;padding: 10px;box-sizing:border-box;}
+.items{width:calc(100% - 30px);overflow: hidden;margin-bottom: 2px;margin-left: 15px;padding: 7px 0;box-sizing:border-box;}
+
+.history-list{font-size: 0.8em;}
+.history{padding: 10px;border-bottom: 1px #DDDDDD solid;}
+
+.no-data{padding: 15px;box-sizing:border-box;text-align: center;font-size: 0.8em;color: #999999;}
+
+.search-clear{width:16px;height: 16px;position: absolute;right: 25px;margin-top: -23px;}
+.clear-btn{padding: 15px;text-align: center;color: #999999;}

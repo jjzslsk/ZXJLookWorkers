@@ -1,0 +1,133 @@
+<!--pages/ownerBBS/ownerBBS.wxml-->
+<view class='body'>
+  <scroll-view scroll-y class='scroll-area'>    
+    <!-- <image class='bg-img' mode='widthFix' src='{{imgUrl}}'></image> -->
+    <view class="aui-flex-col aui-flex-middle search-bar">
+      <view class="aui-flex-item-12 search-item">
+        <input class="search-input" type="text" placeholder="请输入搜索内容"></input>
+      </view>
+      <view class="aui-flex-item-4 filter">
+        <view class="filter-item-act">话题交流</view>
+      </view>
+      <view class="aui-flex-item-4 filter">
+        <view class="filter-item">装修日记</view>
+      </view>
+      <view class="aui-flex-item-4 filter">
+        <view class="filter-item">小区活动</view>
+      </view>
+    </view>
+
+    <view class="hot">
+      <view class="aui-flex-col aui-flex-middle">
+        <view class="aui-flex-item-8">
+          <view class="">大家都在说</view>
+        </view>
+        <view class="aui-flex-item-4">
+          <view class="hot-more">更多></view>
+        </view>
+      </view>
+      <view class="aui-flex-col aui-flex-middle">
+        <view class="aui-flex-item-4 hot-item">
+          <image class="hot-item-img" mode="center" src="/images/project/msite_topbj.jpg"></image>
+          <view class="hot-item-title">标题内容标题内容标题内容</view>
+          <view class="hot-cmt-count">100次讨论</view>
+        </view>
+        <view class="aui-flex-item-4 hot-item">
+          <image class="hot-item-img" mode="center" src="/images/project/msite_topbj.jpg"></image>
+          <view class="hot-item-title">标题内容标题内容标题内容</view>
+          <view class="hot-cmt-count">100次讨论</view>
+        </view>
+        <view class="aui-flex-item-4 hot-item">
+          <image class="hot-item-img" mode="center" src="/images/project/msite_topbj.jpg"></image>
+          <view class="hot-item-title">标题内容标题内容标题内容</view>
+          <view class="hot-cmt-count">100次讨论</view>
+        </view>
+      </view>
+    </view>
+
+    <view>
+      <view class="aui-flex-col aui-flex-middle tab">
+        <view class="aui-flex-item-3">
+          <view class="tab-title-act">热门</view>
+        </view>
+        <view class="aui-flex-item-3">
+          <view class="tab-title">最近</view>
+        </view>
+        <view class="aui-flex-item-3">
+          <view class="tab-title">推荐</view>
+        </view>
+        <view class="aui-flex-item-3">
+          <view class="tab-title">本地</view>
+        </view>
+      </view>
+      <view class="list">
+        <view class="aui-flex-col aui-flex-middle list-item">
+          <view class="aui-flex-item-3">
+            <image class="list-item-img" mode="center" src="/images/project/msite_topbj.jpg"></image>
+          </view>
+          <view class="aui-flex-item-9 margin-b-5">
+            <view class="list-item-title">文章标题文章标题</view>
+            <view class="list-item-content">文章内容文章内容文章内容文章内容文章内容</view>
+            <view class="list-item-count">10000人浏览</view>
+          </view>
+          <view class="aui-flex-item-12">
+            <view class="aui-flex-item-4">
+              <view class="list-footer-count">1000人评论</view>
+            </view>
+            <view class="aui-flex-item-4">
+              <view class="list-footer-count">1000人点赞</view>
+            </view>
+            <view class="aui-flex-item-4">
+              <view class="list-footer-count">1000人分享</view>
+            </view>
+          </view>         
+        </view>
+
+        <view class="aui-flex-col aui-flex-middle list-item">
+          <view class="aui-flex-item-3">
+            <image class="list-item-img" mode="center" src="/images/project/msite_topbj.jpg"></image>
+          </view>
+          <view class="aui-flex-item-9 margin-b-5">
+            <view class="list-item-title">文章标题文章标题</view>
+            <view class="list-item-content">文章内容文章内容文章内容文章内容文章内容</view>
+            <view class="list-item-count">10000人浏览</view>
+          </view>
+          <view class="aui-flex-item-12">
+            <view class="aui-flex-item-4">
+              <view class="list-footer-count">1000人评论</view>
+            </view>
+            <view class="aui-flex-item-4">
+              <view class="list-footer-count">1000人点赞</view>
+            </view>
+            <view class="aui-flex-item-4">
+              <view class="list-footer-count">1000人分享</view>
+            </view>
+          </view>         
+        </view>
+
+        <view class="aui-flex-col aui-flex-middle list-item">
+          <view class="aui-flex-item-3">
+            <image class="list-item-img" mode="center" src="/images/project/msite_topbj.jpg"></image>
+          </view>
+          <view class="aui-flex-item-9 margin-b-5">
+            <view class="list-item-title">文章标题文章标题</view>
+            <view class="list-item-content">文章内容文章内容文章内容文章内容文章内容</view>
+            <view class="list-item-count">10000人浏览</view>
+          </view>
+          <view class="aui-flex-item-12">
+            <view class="aui-flex-item-4">
+              <view class="list-footer-count">1000人评论</view>
+            </view>
+            <view class="aui-flex-item-4">
+              <view class="list-footer-count">1000人点赞</view>
+            </view>
+            <view class="aui-flex-item-4">
+              <view class="list-footer-count">1000人分享</view>
+            </view>
+          </view>         
+        </view>
+        
+      </view>
+    </view>
+  </scroll-view>    
+</view>

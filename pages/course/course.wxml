@@ -1,0 +1,136 @@
+<!--pages/course/course.wxml-->
+<view class='mall-box'>
+<scroll-view scroll-y class='scroll-area'>
+  <image class="mall-img" bindtap="openMall" mode="widthFix" src='{{mallImg}}'></image>
+</scroll-view>
+  
+  <!-- <view class='btn' bindtap="openMall">
+    <view>点击进入</view>
+    <view>装修学堂</view>
+  </view> -->
+</view>
+<!-- 
+<view class='body'>
+  <view class='search-bar'>
+    <input class='search-input' placeholder='请输入搜索关键字'></input>
+  </view>
+  <view class='items'>
+    <i-grid>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/xgt_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>效果图</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/zxgl_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>装修攻略</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/fwbz_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>服务保障</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/jsj_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>计算器</i-grid-label>
+        </i-grid-item>
+    </i-grid>
+    <i-grid>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/zsjs_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>找设计师</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/jlgj_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>监理工匠</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/zxfq_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>装修分期</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/yzfw_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>一站服务</i-grid-label>
+        </i-grid-item>
+    </i-grid>
+    <i-grid>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/qwdz_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>全屋定制</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/xwrd_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>新闻热点</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/hd_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>活动</i-grid-label>
+        </i-grid-item>
+        <i-grid-item></i-grid-item>
+    </i-grid>
+  </view>
+  <view class='items'>
+    <view class='item-title'>问题查找</view>
+    <i-grid>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/xjqz_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>新家启装</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/clzs_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>材料知识</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/rzdq_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>软装搭配</i-grid-label>
+        </i-grid-item>
+    </i-grid>
+    <i-grid>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/jjsh_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>居家生活</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/lgsj_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>灵感设计</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/course/sgjl_icon.png" />
+            </i-grid-icon>
+            <i-grid-label>施工交流</i-grid-label>
+        </i-grid-item>
+    </i-grid>
+    
+  </view>
+</view> -->

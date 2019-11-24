@@ -1,0 +1,15 @@
+<!--pages/login/login.wxml-->
+<view class='body-bg'>
+    <view class='user-ave'>
+        <image lazy-load="true" mode="widthFix" src='/images/avatar_h.png' />
+    </view>
+    <view class='title-hint'>为了您的账号安全，请绑定手机号</view>
+    <!-- <view class='wx-bind-item'> -->
+    <button class='wx-bind-item' hover-class="submit-btn-sel-bg" open-type="getUserInfo" bindgetuserinfo="getUserInfo"> 微信用户快速绑定 </button>
+    <!-- <button class='wx-bind-item' hover-class="submit-btn-sel-bg" open-type='getPhoneNumber' bindgetphonenumber="getPhoneNumber">获取用户手机号</button> -->
+      <!-- <view class='wx-bind-btn' bindtap='weBindTap' hover-class="submit-btn-sel-bg">微信用户快速绑定</view> -->
+    <!-- </view> -->
+    <view class='phone-bind-item'>
+      <view class='phone-bind-btn' bindtap='phoneBindTap' hover-class="item-click-sel-bg">输入手机号码绑定</view>
+    </view>
+</view>

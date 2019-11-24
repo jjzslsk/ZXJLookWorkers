@@ -1,0 +1,24 @@
+<!--pages/activityList/activityList.wxml-->
+<view class='body'>
+  <scroll-view scroll-y class='scroll-area'>
+    <view>
+      <view class="aui-flex-col list-item" wx:for="{{list}}" wx:for-item="li" wx:key="ROWID" bindtap="openDetail" data-id="{{li.W_ACT_ID}}" >
+        <view class="aui-flex-item-4">
+          <image class="list-img" mode='aspectFill' src="{{li.IMG_URL}}"></image>
+        </view>
+        <view class="aui-flex-item-8 list-content">
+          <view class='title'>{{li.TITLE}}</view>
+          <view class='content ellipsis-1'>         
+            <text class='price'>￥{{li.ACT_PRICE}}</text>
+            <text class='unit' wx:if="{{li.AMOUNT_UNIT}}">{{li.AMOUNT_UNIT}}</text>
+            <text class='name' wx:if="{{li.COMPANY_NAME}}">{{li.COMPANY_NAME}}</text>
+          </view>
+          <view class='address ellipsis-1' wx:if="{{li.ADDRESS}}">{{li.ADDRESS}}</view>
+        </view>
+        <image class="list-icon" src="/images/activity-icon.png"></image>
+      </view>
+    </view>
+    
+  </scroll-view>  
+</view>
+

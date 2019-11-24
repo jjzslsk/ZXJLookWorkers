@@ -1,0 +1,26 @@
+<!--pages/complaintAdvice/complaintAdvice.wxml-->
+<!-- <view class='body-bg'>
+  <scroll-view scroll-y class='scroll-area'>
+      <view class='content'>
+        <textarea bindinput="contentInput" value='{{content}}' auto-focus placeholder="请输入您的投诉建议(最多500字)" maxlength='500' />
+      </view>
+      <view class='submit-area'>
+        <view class='submit-btn' bindtap='submitTap' hover-class="submit-btn-sel-bg" disabled="true">提交</view>
+      </view>
+  </scroll-view>
+</view> -->
+<view class="cardBox" hover-class="none" hover-stop-propagation="false">
+  <i-card extra="">
+    <view slot="content" style='font-size:16px;color:#111111' >
+      <text decode='true'>可通过以下方式联系我们</text>
+    </view>
+<view slot="footer" style='font-size:14px;color:#111111'>
+  <text selectable='true' decode='true' >
+      微信：zhuangxj888\n
+      QQ：2809712409\n
+      zhuangxj888@163.com\n
+  </text>
+ <text selectable='true' decode='true' style='color:blue' bindtap='clickPhone'>400电话：400-8798980</text>
+</view>
+</i-card>
+</view>

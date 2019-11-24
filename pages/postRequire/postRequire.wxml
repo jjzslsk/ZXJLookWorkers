@@ -1,0 +1,184 @@
+<!--pages/postRequire/postRequire.wxml-->
+<view class='body'>
+<scroll-view scroll-y class='scroll-area'>
+  <view class='step-area'>
+    <view class='aui-flex-col aui-flex-middle'>
+      <view class='aui-flex-item-2'>
+        <view class='step-num step-act'>1</view>
+        <view class='cl-theme'>发布需求</view>
+      </view>
+      <view class='aui-flex-item-2'>
+        <view class='step-num'>2</view>
+        <view>工人报价</view>
+      </view>
+      <view class='aui-flex-item-2'>
+        <view class='step-num'>3</view>
+        <view>确认开工</view>
+      </view>
+      <view class='aui-flex-item-2'>
+        <view class='step-num'>4</view>
+        <view>施工中</view>
+      </view>
+      <view class='aui-flex-item-2'>
+        <view class='step-num'>5</view>
+        <view>竣工确认</view>
+      </view>
+      <view class='aui-flex-item-2'>
+        <view class='step-num'>6</view>
+        <view>竣工</view>
+      </view>
+    </view>
+  </view>
+  <view class='aui-flex-col aui-flex-middle border-b' wx:if="{{type=='book'}}">
+    <view class='aui-flex-item-3 list-title'>工匠：</view>
+    <view class='aui-flex-item-9 list-text'>{{workerName}}</view>  
+  </view>
+  <!-- <view class='aui-flex-col aui-flex-middle border-b' wx:if="{{type=='book'}}">
+    <view class='aui-flex-item-12 list-title'>需要工种：<text class='more-item-tips'>(点击可进入选择)</text></view>
+    <view class='aui-flex-item-12 border-b padded-10-0' wx:if="{{workBasicRecord.length>0}}">
+      <view class='classify-item' wx:for="{{workBasicRecord}}" wx:for-item="item">{{item.className}}</view>
+    </view>
+    <view class='aui-flex-item-12 border-b padded-10-0' wx:else bindtap='pickWorkerClass'>
+      <view class='pick-tips'>点击选择工种</view>
+    </view>
+    <view class='aui-flex-item-12 padded-10-0'>
+      <view class='local-price'>当地行情参考</view>
+    </view>
+  </view> -->
+  <view class='aui-flex-col aui-flex-middle border-b'>
+    <view class='aui-flex-item-12 list-title'>我需要找：</view>
+    <view class='aui-flex-item-12 border-b padded-10-0'>
+      <view class='classify-item' wx:for="{{workBasicRecord}}" wx:for-item="item">{{item.className}}</view>
+    </view>
+    <view class='aui-flex-item-12 padded-10-0'>
+      <view class='local-price' bindtap='getMarketData'>
+        工种报价参考
+        <image class="local-price-icon" src="/images/search.png"></image>
+      </view>
+      
+    </view>
+  </view>
+  <view class='aui-flex-col aui-flex-middle border-b'>
+    <view class='aui-flex-item-3 list-title'><text class='bt'>*</text>开工日期：</view>
+    <view class='aui-flex-item-4 list-text'>
+      <picker mode="date" value="{{planStartDate}}" bindchange="bindDateChange">
+        <view class="picker">{{planStartDate}}</view>
+      </picker>
+    </view>  
+    <view class='aui-flex-item-2 list-title'><text class='bt'>*</text>时间：</view>
+    <view class='aui-flex-item-3 list-text'>
+      <picker mode="time" value="{{planStartTime}}" bindchange="bindTimeChange">
+        <view class="picker">{{planStartTime}}</view>
+      </picker>
+    </view>  
+  </view>
+  <view class='aui-flex-col aui-flex-middle border-b'>
+    <view class='aui-flex-item-3 list-title'><text class='bt'>*</text>工作地点：</view>
+    <view class='aui-flex-item-8 list-text'>
+      <input value='{{sendClientAddress}}' type='text' data-type="sendClientAddress" bindinput="onInputChange" placeholder='{{sendClientAddressPlaceHolder}}'></input>
+    </view>
+    <view class='aui-flex-item-1' bindtap='chooseLocation'><i-icon type="coordinates_fill" size="22" color="#259B24" /></view>
+  </view>
+  <view class='aui-flex-col aui-flex-middle border-b'>
+    <view class='aui-flex-item-12 list-title'>施工场景：({{pickedImgs.length}}/9)</view>
+    <view class='aui-flex-item-12 padded-b-10'>
+      <view class='aui-flex-col aui-flex-middle'>
+        <view class='aui-flex-item-3 img-info' wx:key="" wx:for-item="pi" wx:for="{{pickedImgs}}">
+          <view class='img-delete' data-index="{{index}}" bindtap='deleteImg'>×</view>
+          <view class='img-item'>
+            <image mode="aspectFit" src='{{pi}}' data-i="{{index}}"  bindtap='previewImage'></image>
+          </view>          
+        </view>
+        <view class='aui-flex-item-3 img-info' bindtap='chooseImage' wx:if="{{pickedImgs.length<9}}">        
+          <view class='img-item'>+</view>          
+        </view>
+      </view>
+    </view>
+  </view>
+
+  <view class='more-item' bindtap='showMore'>
+    <view class="" hover-class="none" hover-stop-propagation="false">
+      更多说明
+      <text class='more-item-tips' wx:if="{{!showMore}}">(非必填，点击展开)</text>
+      <text class='more-item-tips' wx:if="{{showMore}}">(非必填，点击隐藏)</text>
+    </view>
+      <view class="" hover-class="none" hover-stop-propagation="false">
+        <i-icon wx:if="{{!showMore}}" type="unfold" />
+        <i-icon wx:if="{{showMore}}" type="packup" />
+      </view>
+  </view>
+  <view wx:if="{{showMore}}">
+    <view class='aui-flex-col aui-flex-middle border-b'>
+      <view class='aui-flex-item-3 list-title'>报酬方式：</view>
+      <view class='aui-flex-item-9'></view>  
+      <view class='aui-flex-item-12 padded-b-10'>
+        <view class='aui-flex-col aui-flex-middle'>
+          <view class='aui-flex-item-4 type' wx:key="" wx:for-item="pl" wx:for="{{payTypeList}}">
+            <view class='type-item type-item-act' wx:if="{{pl==pickedPT}}">{{pl}}</view>
+            <view class='type-item' bindtap='payTypeItemTap' data-name="{{pl}}" wx:else>{{pl}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle border-b'>
+      <view class='aui-flex-item-3 list-title'>工资标准：</view>
+      <view class='aui-flex-item-5 list-input'>
+        <input value="{{gzbz}}" type="number" data-type="gzbz" bindinput="onPriceItemInput"></input>
+        <view class='list-tips'>元</view>
+      </view>  
+      <view class='aui-flex-item-4 padded-l-15'>
+        <i-switch value="{{sendNegPriceFlag}}" bind:change="onPriceFlagChange" slot="footer"></i-switch> 可议
+      </view>
+    </view>
+
+    <view class='aui-flex-col aui-flex-middle border-b'>
+      <view class='aui-flex-item-3 list-title'>所需人数：</view>
+      <view class='aui-flex-item-5 list-input'>
+        <input value="{{sxrs}}" type="number" data-type="sxrs" bindinput="onPriceItemInput"></input>
+        <view class='list-tips'>人</view>
+      </view>  
+      <view class='aui-flex-item-4'></view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle border-b'>
+      <view class='aui-flex-item-3 list-title'>预计天数：</view>
+      <view class='aui-flex-item-5 list-input'>
+        <input value="{{yjts}}" type="number" data-type="yjts" bindinput="onPriceItemInput"></input>
+        <view class='list-tips'>天</view>
+      </view>  
+      <view class='aui-flex-item-4'></view>
+    </view>
+
+    <view class='aui-flex-col aui-flex-middle border-b' bindtap="autoFocus">
+      <view class='aui-flex-item-3 list-title' bindtap="autoFocus">需求说明：</view>
+      <view class='aui-flex-item-9' bindtap="autoFocus"></view>  
+      <view class='aui-flex-item-12 note' bindtap="autoFocus">
+        <textarea bindtap="autoFocus" placeholder='工作详细描述:工作量，工作要求等' auto-height="true" data-type="sendMemo" bindinput="onInputChange" focus="{{autoFocus}}" value="{{sendMemo}}"></textarea>
+      </view> 
+    </view>
+    <view class='aui-flex-col aui-flex-middle border-b'>
+      <view class='aui-flex-item-3 list-title'>其它说明：</view>
+      <view class='aui-flex-item-9'></view>
+      <view class='aui-flex-item-12 padded-b-10'>
+        <view class='aui-flex-col aui-flex-middle'>
+          <view class='aui-flex-item-3 type' wx:key="" wx:for="{{sendMemoTeamArray}}" wx:for-item="smta">
+            <view class='type-item type-item-act' data-content="{{smta}}" data-i="{{index}}" bindtap='sendMemoTeamTap' wx:if="{{sendMemoTeamPicked[index]}}">{{smta}}</view>
+            <view class='type-item' data-content="{{smta}}" data-i="{{index}}" bindtap='sendMemoTeamTap' wx:else>{{smta}}</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle border-b'>
+      <view class='aui-flex-item-3 list-title'>预计费用：</view>
+      <view class='aui-flex-item-9 list-input'>
+        <input value="{{yjfy}}" type="number" data-type="yjfy" bindinput="onPriceItemInput"></input>
+        <view class='list-tips'>元</view>
+      </view>  
+    </view>
+  </view>  
+
+  <view class='xy-tips'>提交即代表您同意<text bindtap='clickAgreement' data-content="worker" class='cl-theme'>《装小匠服务协议》</text></view>
+  <view class='commit-btn' bindtap='commitForm'>提交</view>
+</scroll-view>
+<!-- 选择支付方式payDialog-->
+<payDialog id='payDialog'></payDialog>
+</view>

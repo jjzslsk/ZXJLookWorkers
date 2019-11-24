@@ -1,0 +1,9 @@
+<!--pages/workerApp/workerApp.wxml-->
+<view>
+  <image class='mall-img' mode="widthFix" src='/images/placeholder.png'></image>
+  <view class='btn'>
+    <view>点击下载</view>
+    <view>工人端APP</view>
+  </view>
+</view>
+

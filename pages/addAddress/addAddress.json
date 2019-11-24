@@ -1,0 +1,7 @@
+{
+  "navigationBarTitleText": "新增地址",
+  "usingComponents": {
+    "i-input": "/dist/input/index",
+    "i-icon": "/dist/icon/index"
+  }
+}

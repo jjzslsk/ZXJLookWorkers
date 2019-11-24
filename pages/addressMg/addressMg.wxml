@@ -1,0 +1,31 @@
+<!--pages/addressMg/addressMg.wxml-->
+<view class='body-bg'>
+  <view class='add-btn' bindtap='goAddAddress'>新增</view>
+  <scroll-view scroll-y class="{{action==1 ? 'scroll-area-choose':'scroll-area-def'}}">
+    <!-- 地址列表 -->
+    <view class='address-list' wx:for="{{addressList}}" wx:for-item="addressItem" wx:for-index="index" wx:key="clientAddressId">
+      <view class='address-item'>
+        <view wx:if="{{action==1}}" class='choose-address-raido' bindtap='chooseAddressTab' data-id="{{addressItem.clientAddressId}}" data-index="{{index}}">
+          <image wx:if="{{chooseAddressCur.id==addressItem.clientAddressId}}" lazy-load="true" mode="widthFix" src='/images/icon/radio_sel.png' />
+          <image wx:else lazy-load="true" mode="widthFix" src='/images/icon/radio_nor.png' />
+        </view>
+        <view class='address-content'>
+          <view class='user-name-phone'>
+            <view>收货人:{{addressItem.clientName}}</view>
+            <view>{{addressItem.clientPhone}}</view>
+          </view>
+          <view class='address'>收货地址:{{addressItem.clientAddress}}</view>
+          <view class='item-footer'>
+            <view class='set-def' bindtap='setDefTap' data-id="{{addressItem.clientAddressId}}" data-index="{{index}}">
+              <image wx:if="{{addressItem.defaultFlag==1}}" lazy-load="true" mode="widthFix" src='/images/icon/radio_sel.png' />
+              <image wx:else lazy-load="true" mode="widthFix" src='/images/icon/radio_nor.png' />设为默认</view>
+            <view class='item-del' bindtap='delAddressTap' data-id="{{addressItem.clientAddressId}}" data-index="{{index}}">
+              <image lazy-load="true" mode="widthFix" src='/images/icon/del.png' />删除</view>
+          </view>
+        </view>
+      </view>
+    </view>
+    <i-divider i-class="footer-hint">已加载完全部</i-divider>
+  </scroll-view>
+  <view wx:if="{{action==1}}" class='confirm-address' bindtap='confirmChoose'>确定</view>
+</view>

@@ -1,0 +1,83 @@
+<!--pages/postNote/postNote.wxml-->
+<view class='body'>
+  <scroll-view scroll-y class='scroll-area'>
+    <view class='title'>发布提示：</view>
+    <view class='content'>
+    1、发布需求是面向众多工匠发布广告，发布后会有多个工匠师傅报价，请您关注微信及短信提示，<text class='cl-org'>您可根据工匠工人信息与报价或“聊一聊”后选择合适工匠师傅，并预先支付其报价至平台，（500元以内全额支付，500元以上支付定金）</text>
+    </view>
+    <view class='content'>
+    2、师傅将与您预约上门服务时间，请及时关注微信/短信推送。
+    </view>
+    <view class='content'>
+    3、师傅上门服务时，根据施工现场情况（第一次报价与现场预估价格不一致时），需双方协商，业主同意后确认开工。如工匠认为价格需调高，业主不同意，师傅需按首次报价施工，否则平台将扣去师傅一定押金。
+    </view>
+    <view class='content'>
+    4、竣工确认之后，您预付至平台的款项将转付至工匠账户，请及时并谨慎评价确认。
+    </view>
+    <view class='content'>
+    5、在施工中，经过协商一致，双方都可以修改价款，修改价格以最后一次确定价格为参照，工人端只调低价格，业主端只能追加调高价格，调高价格需及时付款，调低价格在竣工提交确认时统一结算，多退少补。
+    </view>
+    <view class='title'>下单流程：</view>
+    <view class='aui-flex-col aui-flex-middle padding-0'>
+      <view class='flex-item-step'>
+        <image class='step-img' mode="widthFix" src='/images/post/step1.jpg'></image>
+      </view>
+      <view class='flex-item-arrow'>
+        <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+      </view>
+      <view class='flex-item-step'>
+        <image class='step-img' mode="widthFix" src='/images/post/step2.jpg'></image>
+      </view>
+      <view class='flex-item-arrow'>
+        <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+      </view>
+      <view class='flex-item-step'>
+        <image class='step-img' mode="widthFix" src='/images/post/step3.jpg'></image>
+      </view>
+      <view class='flex-item-arrow'>
+        <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+      </view>
+      <view class='flex-item-step'>
+        <image class='step-img' mode="widthFix" src='/images/post/step4.jpg'></image>
+      </view>
+      <view class='flex-item-arrow'>
+        <image class='step-img' mode="widthFix" src='/images/post/arrow.jpg'></image>
+      </view>
+      <view class='flex-item-step'>
+        <image class='step-img' mode="widthFix" src='/images/post/step5.jpg'></image>
+      </view>
+    </view>
+    <view class='aui-flex-col aui-flex-middle padding-0'>
+      <view class='flex-item-step padding-0'>发布需求</view>
+      <view class='flex-item-arrow'></view>
+      <view class='flex-item-step padding-0'>工匠报价</view>
+      <view class='flex-item-arrow'></view>
+      <view class='flex-item-step padding-0'>选择工匠</view>
+      <view class='flex-item-arrow'></view>
+      <view class='flex-item-step padding-0'>现场施工</view>
+      <view class='flex-item-arrow'></view>
+      <view class='flex-item-step padding-0'>服务评价</view>
+    </view>
+    <view class='title'>服务承诺：</view>
+    <view class='content'>
+      <view class='cl-org'>一、未服务全额退款</view>
+      <view>未选择工匠报价前可随时终止订单。如业主选择报价后，工匠师傅取消订单，全额退款将于0-3个工作日到账。</view>
+    </view>
+    <view class='content'>
+      <view class='cl-org'>二、预约时间</view>
+      <view>用户支付首次报价订单完成后，师傅将会在1小时内跟用户预约上门服务的时间。</view>
+    </view>
+    <view class='content'>
+      <view class='cl-org'>三、准时上门</view>
+      <view>师傅按照预约时间，准时上门服务。</view>
+    </view>
+    <view class='tips'>
+      <view class='tips-title'>线上交易保障</view>
+      <view>线上交易能够享受权益保障，平台在线支付订单均为凭证。为了保障您的权益，请选择线上交易。</view>
+    </view>
+    
+  </scroll-view>  
+  <view class='footer'>
+    <view class='confirm-btn' bindtap='openClassDetail'>我知道了</view>
+  </view>
+</view>

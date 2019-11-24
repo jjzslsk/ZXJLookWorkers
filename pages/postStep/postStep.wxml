@@ -1,0 +1,38 @@
+<!--pages/postStep/postStep.wxml-->
+
+<view class='body' wx:if="{{!showWorkerClass}}">
+  <scroll-view scroll-y class='scroll-area' wx:if="{{classList.length>0}}">
+    <view class='step-tips' wx:if="{{pickedData.length>0}}">
+      <!-- <text wx:if="{{currentDetail.UI_MODE=='1'}}">【单选】</text>
+      <text wx:elif="{{currentDetail.UI_MODE=='2'}}">【单选】</text>
+      <text wx:elif="{{currentDetail.UI_MODE=='3'}}">【填写】</text> -->
+      <text wx:for="{{pickedData}}" wx:for-item="picked" wx:key="id">{{picked.className}} > </text>
+    </view>  
+    <view class='aui-flex-col aui-flex-middle pick-info' wx:for="{{currentDetail}}" wx:for-item="childItem" wx:key="{{childItem.CLIENT_CLASS_ID}}" data-index="{{index}}" data-id="{{childItem.CLIENT_CLASS_ID}}" data-name="{{childItem.CLASS_NAME}}" bindtap='pickItem'>
+      <view class='aui-flex-item-1 pick-icon'>
+        <image src='/images/worker/pick-act.png' wx:if="{{childItem.picked}}"></image>
+        <image src='/images/worker/pick.png' wx:else></image>
+      </view>
+      <view class='aui-flex-item-11 pick-content'>{{childItem.CLASS_NAME}}</view>
+    </view>
+  </scroll-view>
+  <view class='load-tips' wx:else>暂无数据</view>
+  <view class='step-btn' bindtap='nextStep' wx:if="{{firstStep}}">下一步</view>
+  <view class='step-btn' wx:else>
+    <view class='step-btn-item' bindtap='prevStep'>上一步</view>
+    <view class='step-btn-item2' bindtap='nextStep'>下一步</view>
+  </view> 
+</view>
+<view class='body' wx:else>
+  <scroll-view scroll-y class='scroll-area' wx:if="{{workerClass.length>0}}">
+    <view class='step-tips'>请选择您需要预约的工种类型</view>  
+    <view class='aui-flex-col aui-flex-middle pick-info' wx:for="{{workerClass}}" wx:for-item="childItem" wx:key="{{childItem.CLIENT_CLASS_ID}}" data-index="{{index}}" data-id="{{childItem.CLIENT_CLASS_ID}}" data-name="{{childItem.class_name}}" bindtap='pickWorkerClass'>
+      <view class='aui-flex-item-1 pick-icon'>
+        <image src='/images/worker/pick-act.png' wx:if="{{childItem.picked}}"></image>
+        <image src='/images/worker/pick.png' wx:else></image>
+      </view>
+      <view class='aui-flex-item-11 pick-content'>{{childItem.class_name}}</view>
+    </view>
+  </scroll-view>
+</view>
+

@@ -1,0 +1,30 @@
+<!--pages/addAddress/addAddress.wxml-->
+<view class='body-bg'>
+  <view class='save-btn'  bindtap='saveTap' hover-class="item-click-sel-bg">保存</view>
+  <i-input value="{{userName}}" bind:change="bindInputUserName" title="收货人:" type="text" maxlength="15" autofocus placeholder="请输入收货人姓名(最多15字)" />
+  <i-input value="{{phone}}" bind:change="bindInputPhone" title="联系电话:" type="number" maxlength="11" placeholder="请输入联系电话" />
+  <!-- 所在地区 -->
+  <view class='list-item'>
+    <view class='item-content' hover-class="item-click-sel-bg">
+      <text class='title'>所在地区:</text>
+      <picker class='picker' bindchange="chooseAddressTap" mode="region" value="{{pickerRegion}}">
+        <view class='picker-address'>
+          <view class='address-content' wx:if="{{address.length>0}}">{{address}}</view>
+          <view class='address-content hint-color' wx:else>请输入省、市、区</view>
+          <view class='icon'>
+            <i-icon type="enter" size='20' color='#000000' />
+          </view>
+        </view>
+      </picker>
+    </view>
+  </view>
+  <i-input value="{{addressDetail}}" bind:change="bindInputAddressDetail" title="详细地址:" type="text" maxlength="60" placeholder="请输入详细地址(最多60字)" />
+  <i-input value="{{addressCode}}" bind:change="bindInputAddressCode" title="邮编:" type="number" maxlength="6" placeholder="请输入6位邮编" />
+  <view class='list-item'>
+    <view class='set-def-item'>
+      <text class='title'>设置默认:</text>
+      <image wx:if="{{isDef}}" lazy-load="true" mode="widthFix" src='/images/icon/radio_sel.png' bindtap='setDefTab' />
+      <image wx:else lazy-load="true" mode="widthFix" src='/images/icon/radio_nor.png' bindtap='setDefTab' />
+    </view>
+  </view>
+</view>

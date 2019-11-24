@@ -1,0 +1,15 @@
+<!--pages/marketInfo/marketInfo.wxml-->
+<import src="../../utils/wxParse/wxParse.wxml" />
+<!-- <view class='body'>
+  <scroll-view scroll-y scroll-x="true" class='scroll-area'>    
+    <rich-text nodes="{{content}}" bindtap="tap" wx:if="{{content}}"></rich-text>
+    <view class='tips' wx:else>暂无数据</view>
+  </scroll-view>    
+</view> -->
+<view class="body-bg">
+  <scroll-view scroll-y class='scroll-area'>
+    <view>
+      <template is="wxParse" data="{{wxParseData:article.nodes}}" />
+    </view>
+  </scroll-view>
+</view>

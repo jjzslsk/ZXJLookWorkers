@@ -1,0 +1,43 @@
+<!--pages/project/project.wxml-->
+<view class='body'>
+  <image class='banner' mode="widthFix" src='/images/project/msite_topbj.jpg'></image>
+  <view class='grid'>
+    <i-grid>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/project/zhuangxsp.png" />
+            </i-grid-icon>
+            <i-grid-label>装修直播</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/project/zhijpg.png" />
+            </i-grid-icon>
+            <i-grid-label>质检报告</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/project/zhifkx.png" />
+            </i-grid-icon>
+            <i-grid-label>支付款项</i-grid-label>
+        </i-grid-item>
+        <i-grid-item>
+            <i-grid-icon>
+                <image src="/images/project/gengdcz.png" />
+            </i-grid-icon>
+            <i-grid-label>更多操作</i-grid-label>
+        </i-grid-item>
+    </i-grid>
+  </view>  
+  <view class='tab-head'>
+    <i-tabs current="{{ current }}" color="#259b24" bindchange="handleChange">
+      <i-tab key="tab1" title="装修前"></i-tab>
+      <i-tab key="tab2" title="水电工程"></i-tab>
+      <i-tab key="tab3" title="中期工程"></i-tab>
+      <i-tab key="tab4" title="竣工工程"></i-tab>
+    </i-tabs>
+  </view>
+  <view class='foot_title' style='font-size:14px; margin:10px 18px;'>
+    <text>系统正在内测中...</text>
+  </view>
+</view>

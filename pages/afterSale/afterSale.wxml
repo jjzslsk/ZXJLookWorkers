@@ -1,0 +1,52 @@
+<!--pages/afterSale/afterSale.wxml-->
+<view class='body'>
+  <view wx:if="{{!detail}}">   
+    <view class='aui-flex-col aui-flex-middle block'>
+      <view class='aui-flex-item-12 list-title'>问题描述</view>
+      <view class='aui-flex-item-12'><textarea class='content' bindinput="onInputChange" placeholder='请输入问题描述...'></textarea></view>
+      <view class='aui-flex-item-12 list-title'>图片：({{pickedImgs.length}}/9)</view>
+      <view class='aui-flex-item-12 padded-b-10'>
+        <view class='aui-flex-col aui-flex-middle'>
+          <view class='aui-flex-item-3 img-info' wx:key="" wx:for-item="pi" wx:for="{{pickedImgs}}">
+            <view class='img-delete' data-index="{{index}}" bindtap='deleteImg'>×</view>
+            <view class='img-item'>
+              <image mode="aspectFit" src='{{pi}}' data-i="{{index}}"  bindtap='previewImage'></image>
+            </view>          
+          </view>
+          <view class='aui-flex-item-3 img-info' bindtap='chooseImage' wx:if="{{pickedImgs.length<9}}">        
+            <view class='img-item'>+</view>          
+          </view>
+        </view>
+      </view>
+    </view> 
+    <view class='aui-flex-item-12 tips cl-999'>
+      <view>免费服务热线：400-8798-980</view>
+      <view>QQ专线：2809712409</view>
+      <view>邮箱：2809712409@qq.com</view>
+    </view>
+    <view class='commit-btn' bindtap='commitForm'>提交</view>
+  </view>
+
+  <view wx:else>   
+    <view class='aui-flex-col aui-flex-middle block'>
+      <view class='aui-flex-item-12 list-title cl-999'>问题描述：</view>
+      <view class='aui-flex-item-12 '>{{detail.after_sale_desc}}</view>
+      <view class='aui-flex-item-12 list-title cl-999' wx:if="{{detail.pics.length>0}}">图片：</view>
+      <view class='aui-flex-item-12 padded-b-10'>
+        <view class='aui-flex-col aui-flex-middle'>
+          <view class='aui-flex-item-3 img-info' wx:key="" wx:for-item="pi" wx:for="{{detail.pics}}">
+            <view class='img-item'>
+              <image mode="aspectFit" src='{{pi.url}}' data-i="{{index}}"  bindtap='previewImage'></image>
+            </view>          
+          </view>
+        </view>
+      </view>
+    </view> 
+    <view class='aui-flex-item-12 tips cl-999'>
+      <view>免费服务热线：400-8798-980</view>
+      <view>QQ专线：2809712409</view>
+      <view>邮箱：2809712409@qq.com</view>
+    </view>
+  </view>
+</view>
+

@@ -1,0 +1,21 @@
+/* pages/orderDone/orderDone.wxss */
+@import "../../utils/flex.wxss";
+.body{width: 100%;height: 100vh;padding: 10px;box-sizing:border-box;background: #F5F5F5}
+.scroll-area {height:100%;padding-top: 10px;}
+.content{padding: 10px;box-sizing:border-box;font-size: 0.7em;color: #666666;}
+.cl-org{color: #FCAD53}
+.title{font-size: 1.25em;color: #FCAD53;margin-bottom: 5px;}
+.margin-b-10{margin-bottom: 10px;}
+.flex-item-step{width:14%;float: left;padding: 5px;box-sizing:border-box;font-size: 0.7em;text-align: center;}
+.flex-item-arrow{width:7.5%;float: left;padding: 5px;box-sizing:border-box;}
+.step-img{width: 100%;height: 100px;}
+.padding-0{padding: 0;}
+.confirm-btn{text-align: center;height:40px;line-height: 40px;border-radius: 50px;background: #41CC8E;color: #FFFFFF;font-size: 0.8em;margin: 20px auto;}
+.check-order{background: #DDDDDD !important;color: #333333;}
+.done-img{width: 30px;height: 30px;margin: 15px 20px;}
+.done-tips{color: #41CC8E;font-size: 1.15em;}
+.order-info{padding: 20px 15%;box-sizing:border-box;font-size: 0.8em;text-align: center;}
+.price-info{border-bottom: 1px #DDDDDD solid;padding: 5px 20px;box-sizing:border-box;margin-bottom: 5px;}
+.step-info{background: #FFFFFF;padding: 10px 5px;}
+.detail-link{font-size: 0.7em;color: #41CC8E;text-align: center;}
+.btn{padding: 0 10px;box-sizing:border-box;}
