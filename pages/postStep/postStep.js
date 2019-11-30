@@ -30,7 +30,6 @@ Page({
   },
 
   pickItem: function (e) {
-    console.log( 'e:' + JSON.stringify(e));
     var index = e.currentTarget.dataset.index
     var id = e.currentTarget.dataset.id
     var name = e.currentTarget.dataset.name
@@ -105,7 +104,6 @@ Page({
         title: '加载中',
       })
       var param = 'parentId=' + currentPicked.clientClassId;
-      console.log(param)
       app.httpsDataGet('/worker/getWorkerChild', param,
         function (res) {
           // console.log('getWorkerChild2:' + JSON.stringify(res));
@@ -115,8 +113,6 @@ Page({
             var si={}
             si.data=res.data
             stepItem[siLength] = si
-
-            console.log('getWorkerChild2stepItem:' + JSON.stringify(stepItem));
 
             that.setData({
               currentDetail: res.data,
@@ -134,7 +130,6 @@ Page({
               pickedIndex: pickedIndex
             });
             var picked_str = JSON.stringify(that.data.pickedData)
-            console.log('pickedData:' + JSON.stringify(that.data.pickedData));
             wx.navigateTo({
               url: '/pages/postRequire/postRequire?type=' + that.data.postType + '&pickedItem=' + picked_str + '&workerId=' + that.data.workerId + '&workerName=' + that.data.workerName
             })
@@ -154,7 +149,6 @@ Page({
       var items = []
       items[0] = item
       var item_str = JSON.stringify(items)
-      console.log('this.data.postType2:' + this.data.postType)
       wx.navigateTo({
         url: '/pages/postRequire/postRequire?type=' + this.data.postType + '&pickedItem=' + item_str + '&workerId=' + this.data.workerId + '&workerName=' + this.data.workerName
       })
@@ -188,13 +182,11 @@ Page({
       title: '加载中',
     })
     var param = 'parentId=' + this.data.optionId;
-    console.log(param)
     app.httpsDataGet('/worker/getWorkerChild', param,
       function (res) {
         that.setData({
           loadDone: true
         })
-        console.log('getWorkerChild:' + JSON.stringify(res));
         //成功
         if (res.data && res.data.length > 0) {
           var stepItem = []
@@ -236,7 +228,6 @@ Page({
 
     if(id=='ALL'){
       var workerClass = JSON.parse(options.workerClass)
-      console.log(id)
       this.setData({
         showWorkerClass:true,
         workerClass: workerClass,

@@ -32,10 +32,8 @@ Page({
     }
 
     var p = 'START_POSITION=0' + '&END_POSITION=30' + '&BAIDU_MAP_NO=' + curCityId
-    console.log('work_activity_listppp:' + p);
     app.httpsGetDatByPlatform('work_activity_list', 'list', p,
       function (res) {
-        console.log('work_activity_list:' + JSON.stringify(res));
         var lastBanner
         var lastActivity
         var bannerList = []

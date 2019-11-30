@@ -39,7 +39,6 @@ App({
     var updateManager = wx.getUpdateManager()
     updateManager.onCheckForUpdate(function (res) {
       // 请求完新版本信息的回调
-      console.log(res.hasUpdate)
     })
 
     updateManager.onUpdateReady(function () {
@@ -81,7 +80,6 @@ App({
     wx.removeStorage({
       key: 'pickedClassList',
       success(res) {
-        console.log('清除pickedClassList')
       }
     })
 
@@ -362,7 +360,6 @@ App({
     var paramStr = "key=zxj_repertory&AJAX_MODE=AJAX_MODE_QUERY&DATASET=" + dataSet + "&QUERY_MODE=" + queryMode + "&" + param
     var url = this.globalData.url + '/ajax?' + paramStr;
     var zxjToken = this.getZxjToken();
-     console.log(url)
     wx.request({
       url: url,
       method: 'post',
@@ -439,7 +436,6 @@ App({
     var url = this.globalData.url + '/ajax?' + paramStr;
     url = encodeURI(url);
     var zxjToken = this.getZxjToken();
-     console.log(url)
     wx.request({
       url: url,
       method: 'post',
@@ -450,7 +446,6 @@ App({
       },
       success: res => {
         wx.hideLoading();
-        console.log('platformSuccess:' + JSON.stringify(res))
         if (res.statusCode == 200) {
           var resultData = res.data;
           if (resultData.code == 0 || resultData.code == '0') {
@@ -559,7 +554,6 @@ App({
       },
       fail: res => {
         //请求接口失败
-        console.log('请求失败:' + JSON.stringify(res))
         wx.hideLoading()
         wx.showModal({
           title: '提示',
@@ -576,7 +570,6 @@ App({
   httpsDataGetFS: function (actionUrl, param, call_success, call_fail) {
     var url = this.globalData.urlfs + '/zxj' + actionUrl + '?' + param;
     url = encodeURI(url);
-    console.log(url)
     var zxjToken = this.getZxjToken();
     wx.request({
       url: url,
@@ -921,7 +914,6 @@ App({
           if (resultData.status) {
             typeof call_success == "function" && call_success(resultData)
           } else {
-            console.log (resultData.msg + '(' + resultData.code + ')')
             // wx.showModal({//取消页面提示，在console.log 打印
             //   title: '提示',
             //   content: resultData.msg + '(' + resultData.code + ')',
@@ -1050,7 +1042,6 @@ App({
       for (var index in keyList) {
         var keyStr = keyList[index];
         if (keyStr.indexOf(userId + "_chat_") >= 0) {
-          console.log(keyStr)
           var chatObj = wx.getStorageSync(keyStr);
           var objJson = {};
           if (chatObj == undefined || chatObj == null || chatObj == '') {
@@ -1150,7 +1141,6 @@ App({
    * onSocketClose 监听WebSocket关闭
    */
   getWebSocketConnectState: function (onSocketOpen, onSocketError, onSocketMessage, onSocketClose) {
-    console.log('APPgetWebSocketConnectState');
     onSocketOpenCal = onSocketOpen;
     onSocketErrorCal = onSocketError;
     onSocketMessageCal = onSocketMessage;
@@ -1169,7 +1159,6 @@ App({
   upChatUnreadCount: function (fromuserId) {
     var userId = this.globalData.userId;
     var keyStr = userId + "_chat_" + fromuserId;
-    console.log('' + keyStr)
     var receiveJson = this.readRecordChatCacheBykey(keyStr); //获取与该用户在本地的聊天记录
     var otherPayInfo = this.getChatOtherPayInfo(receiveJson); //获取到聊天对方的用户信息
     var recordData = this.getChatListfilter(receiveJson);
@@ -1347,7 +1336,6 @@ App({
 
   /**聊天发送数据*/
   onSendSocketChat: function(param,sendCalRes) {
-    console.log('onSendSocketChat:' + JSON.stringify(param));
     wx.sendSocketMessage({
       data: JSON.stringify(param),
       success: res => {
@@ -1371,11 +1359,19 @@ App({
     app_secret: '1ddad1a90be3a874d2fc5e6ca3c6495c', //小程序app_secret
     js_code: '',
     shopApp_id:'wx4ae069d1473a78ce',//小程序商城appid
-    url: 'https://www.zxjtest.xyz', //主系统ip 正式：https://www.zxj888.cn:8443,测试：https://www.zxjtest.xyz
-    fileUrl: 'https://www.zxjtest.xyz/upFile',//图片上传地址 正式：https://www.zxj888.cn:8443/upFile,测试：https://www.zxjtest.xyz/upFile
-    urlfs: 'https://www.zxjtest.xyz:9443', //主系统ip  https://www.zxj888.cn:9443/
-    websocketUrl: 'wss://www.zxjtest.xyz:9443/zxj/websocket',   //wss://www.zxj888.cn:9443/zxj/websocket
-    chatUrl: 'https://www.zxjtest.xyz:9443',//正式：https://www.zxj888.cn:9443,测试：https://www.zxjtest.xyz:9443
+    
+    //url: 'https://www.zxj888.cn:8443', //正式环境主系统ip 
+    //fileUrl: 'https://www.zxj888.cn:8443/upFile',//正式环境图片上传地址 
+    //urlfs: 'https://www.zxj888.cn:9443', //正式环境主系统ip
+    //websocketUrl: 'wss://www.zxj888.cn:9443/zxj/websocket',//正式环境websocket
+    //chatUrl: 'https://www.zxj888.cn:9443',//正式环境聊天
+
+    url: 'https://www.zxjtest.xyz', //开发环境主系统ip 
+    fileUrl: 'https://www.zxjtest.xyz/upFile',//开发环境图片上传地址
+    urlfs: 'https://www.zxjtest.xyz:9443', //开发环境主系统ip 
+    websocketUrl: 'wss://www.zxjtest.xyz:9443/zxj/websocket', //开发环境websocket
+    chatUrl: 'https://www.zxjtest.xyz:9443',//开发环境聊天
+
     baiduUrl: 'https://api.map.baidu.com', //百度ip
     realTimeCustomer: '60E246CB7star_red.pngdddddddddB645273DCF2DC4E18B4AEF9',//customer(快递100实时查询接口)
     realTimeKey: 'ImODrCSn9734',//key(快递100实时查询接口)

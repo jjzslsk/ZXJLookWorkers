@@ -159,9 +159,7 @@ Page({
   onInputChange: function (e) {
     var type = e.currentTarget.dataset.type;		
     var val = e.detail.value
-    console.log('val1:' + val);
     val = val.replace(/[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF][\u200D|\uFE0F]|[\uD83C|\uD83D|\uD83E][\uDC00-\uDFFF]|[0-9|*|#]\uFE0F\u20E3|[0-9|#]\u20E3|[\u203C-\u3299]\uFE0F\u200D|[\u203C-\u3299]\uFE0F|[\u2122-\u2B55]|\u303D|[\A9|\AE]\u3030|\uA9|\uAE|\u3030/g, "");
-    console.log('val2:' + val);
     if (type == 'sendWages') {
       this.setData({
         sendWages: val
@@ -187,14 +185,12 @@ Page({
     var pickedImgs = this.data.pickedImgs
     var that = this    
     var count = 9 - pickedImgs.length
-    console.log('count:' + count);
     wx.chooseImage({
       count: count,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
-        console.log('chooseImage:' + JSON.stringify(res))	
         that.setData({
           //pickedImgs: pickedImgs,
           compressImgs: res.tempFilePaths
@@ -211,12 +207,10 @@ Page({
    
     var that = this    
     if (compressImgsIndex < compressImgs.length){
-      console.log(compressImgs[compressImgsIndex])
       wx.compressImage({
         src: compressImgs[compressImgsIndex],
         quality: 50,
         success(res) {
-          console.log('compressImage:' + JSON.stringify(res))	
           pickedImgs.unshift(res.tempFilePath)
 
           compressImgsIndex = compressImgsIndex+1
@@ -228,7 +222,6 @@ Page({
 
           that.compressImage()
         }, fail(res){
-          console.log('compressImageFail:' + JSON.stringify(res))	
         }
       })
     }else{
@@ -274,8 +267,6 @@ Page({
     var uploadedImgIndex = this.data.uploadedImgIndex
     var pickedImgs = this.data.pickedImgs
     var uploadedImgs = this.data.uploadedImgs
-    console.log(pickedImgs[uploadedImgIndex])
-
     var uploadImgParam = {
       attUser: userId,
       attFkId: userId,
@@ -284,7 +275,6 @@ Page({
       clientId: userId,
       attNoWater:'1'
     }
-    console.log('uploadImgParam:' + JSON.stringify(uploadImgParam));
     var that = this
     wx.uploadFile({
       url: app.globalData.fileUrl,
@@ -292,7 +282,6 @@ Page({
       name: 'file',
       formData: uploadImgParam,
       success(res) {
-        console.log('uploadFile:' + JSON.stringify(res));
         if (res.data) {
           var resData = JSON.parse(res.data)
           if (resData.pic && resData.pic.length > 0)
@@ -321,7 +310,6 @@ Page({
     var that=this
     wx.chooseLocation({
       success(res) {
-        console.log('chooseLocation:' + JSON.stringify(res));
         that.setData({
           sendClientAddress: res.address,
           workAddress: res.address
@@ -331,7 +319,6 @@ Page({
   },
   
   commit:function(){
-    console.log('uploadedImgs:' + JSON.stringify(this.data.uploadedImgs));
     var sendClientAddress = this.data.sendClientAddress;
 
     var param={};
@@ -375,7 +362,6 @@ Page({
 
     param.sendMemoTeam = smtp_str
 
-    console.log('commit:' + JSON.stringify(param));
     if (this.data.planStartDate == '请选择'){//判空
       wx.showToast({
           title: '请选择开工日期',
@@ -396,8 +382,7 @@ Page({
       })
     }else {
         app.httpsDataPost3('/worker/publishDemand', param,
-        function (res) {
-          console.log('publishDemand:' + JSON.stringify(res));			
+        function (res) {		
           //成功
           if (res.status){
             wx.showToast({
@@ -405,7 +390,6 @@ Page({
               icon: 'success',
               duration: 2000
             })
-            console.log(res.data.demandId + '-' +res.data.orderNumber)
             wx.reLaunch({
               url: '/pages/orderDone/orderDone?demandId=' + res.data.demandId + '&orderNumber=' + res.data.orderNumber
             })
@@ -426,7 +410,6 @@ Page({
               }
             })
           }
-          console.log('publishDemandFail:' + JSON.stringify(res));	
           //失败
           wx.hideLoading()
         }
@@ -607,7 +590,6 @@ Page({
         'Content-Type': 'application/json'
       },
       success: function (res) {
-        console.log('getLocation:' + JSON.stringify(res));
         var cityCode = res.data.result.cityCode;
         var city = res.data.result.addressComponent.city;
         that.setData({

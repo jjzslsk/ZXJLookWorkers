@@ -3,7 +3,7 @@
     <view class='userinfo'>
       <view class="aui-flex-col">
         <view class="aui-flex-item-12">
-          <view class='focused-btn' bindtap='focusWorker' wx:if="{{isConcern=='1' || isConcern==1}}">已关注</view>
+          <view class='focused-btn' bindtap='focusWorker' wx:if="{{isConcern=='1' || isConcern==1}}">取消关注</view>
           <view class='focus-btn' bindtap='focusWorker' wx:else>关注</view>
           <image bindtap='userImg' class='avatar' show-menu-by-longpress='true'  src='{{detail.AVATAR}}' wx:if="{{detail.AVATAR}}"/>
           <image class='avatar' src='/images/head.png' wx:else/>
@@ -16,7 +16,7 @@
               <image src='/images/worker/star_red.png' wx:if="{{detail.STAR_LEVEL>2}}"></image>
               <image src='/images/worker/star_red.png' wx:if="{{detail.STAR_LEVEL>3}}"></image>
               <image src='/images/worker/star_red.png' wx:if="{{detail.STAR_LEVEL>4}}"></image>
-              <view class='scoreinfo' wx:if="{{detail.STAR_LEVEL>0}}">{{detail.STAR_LEVEL}}.0<text class='hpl' wx:if="{{detail.WORKER_GOOD_REPUTATION>0}}">好评率：{{detail.WORKER_GOOD_REPUTATION}}%</text></view>
+              <view class='scoreinfo' wx:if="{{detail.STAR_LEVEL>0}}">{{detail.STAR_LEVEL}}.0<text class='hpl' wx:if="{{detail.WORKER_GOOD_REPUTATION>0}}">好评率：{{detail.WORKER_GOOD_REPUTATION*100}}%</text></view>
             </view>
           </view>         
         </view>
@@ -107,8 +107,8 @@
               <image class="log-img" mode='aspectFill' src='{{li.IMG_LIST[0].URL}}'></image>
             </view>
             <view class="aui-flex-item-8">
-              <view class="log-desc-title">{{li.SUBJECT_TITLE}}</view>
-              <view class="log-desc ellipsis-2">{{li.SUBJECT_MEMO}}</view>
+              <view class="log-desc-title" wx:if="{{li.SUBJECT_TITLE}}">{{li.SUBJECT_TITLE}}</view>
+              <view class="log-desc ellipsis-2" wx:if="{{li.SUBJECT_MEMO}}">{{li.SUBJECT_MEMO}}</view>
               <view class="log-footer">
                 <view class="aui-flex-item-1">
                   <image class="log-footer-icon" src="/images/worker/log-like-act.png" wx:if="{{li.ZAN_FLAG=='1'}}"></image>
@@ -128,8 +128,8 @@
           </view>
 
           <view class="aui-flex-item-12" wx:else>
-            <view class="log-desc-title">{{li.SUBJECT_TITLE}}</view>
-            <view class="log-desc ellipsis-2">{{li.SUBJECT_MEMO}}</view>
+            <view class="log-desc-title" wx:if="{{li.SUBJECT_TITLE}}">{{li.SUBJECT_TITLE}}</view>
+            <view class="log-desc ellipsis-2" wx:if="{{li.SUBJECT_MEMO}}">{{li.SUBJECT_MEMO}}</view>
             <view class="log-footer">
               <view class="aui-flex-item-1">
                 <image class="log-footer-icon" src="/images/worker/log-like.png"></image>

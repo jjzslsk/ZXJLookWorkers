@@ -69,7 +69,7 @@ Page({
   },
 
   markertap: function (e) {
-    console.log(JSON.stringify(e))
+
   },
 
   focusWorker: function (e) {
@@ -100,7 +100,6 @@ Page({
     var param = 'userId=' + app.globalData.userId + '&beConcernId=' + this.data.detail.CLIENT_ID
     app.httpsDataGet('/worker/concern', param,
       function (res) {
-        console.log('concern:' + JSON.stringify(res));
         that.setData({
           isConcern: isConcern
         })
@@ -210,7 +209,6 @@ Page({
     var param = 'clientId=' + id + '&userId=' + app.globalData.userId;
     app.httpsDataGet('/worker/getWorkerDetail', param,
       function (res) {
-        console.log('getWorkerDetail:' + JSON.stringify(res));
         var workerTypeName = []
         var workerTypeId = []
         if (res.data.workerType && res.data.workerType.length>0){
@@ -289,7 +287,6 @@ Page({
 
       },
       function (returnFrom, res) {
-        console.log('bbs_my_pageerr:' + JSON.stringify(res));
         //失败
         wx.hideLoading();
       }
@@ -307,7 +304,37 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-    console.log(this.data.searchKey)
+    var that=this
+    var p = 'CLIENT_ID=' + this.data.workerId + '&START_POSITION=0' + '&END_POSITION=30' + '&MY_CLIENT_ID=' + app.globalData.userId
+    app.httpsGetDatByPlatform('bbs_my_page', 'list', p,
+      function (res) {
+        //console.log('bbs_my_page1:' + JSON.stringify(res));
+        for (var i = 0; i < res.msg.length; i++) {
+          var imgs = ''
+          if (res.msg[i].IMG_LIST) {
+            imgs = JSON.parse(res.msg[i].IMG_LIST)
+            for (var j = 0; j < imgs.length; j++) {
+              var url = imgs[j].URL.split('mp4')
+              //console.log(res.msg[i].SUBJECT_TITLE+'url.length:'+url.length)
+              if (url.length > 1) {
+                res.msg[i].videoPath = imgs[j].URL
+              }
+            }
+          }
+
+          res.msg[i].IMG_LIST = imgs
+        }
+        //console.log('bbs_my_page2:' + JSON.stringify(res));
+        that.setData({
+          bbsList: res.msg
+        });
+
+      },
+      function (returnFrom, res) {
+        //失败
+        wx.hideLoading();
+      }
+    );
   },
 
   /**

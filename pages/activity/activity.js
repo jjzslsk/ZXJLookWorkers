@@ -23,12 +23,10 @@ Page({
   onLoad: function (options) {
     var id = options.id
     var that=this
-    console.log(id)
     //获取轮播图
     var p ='W_ACT_ID='+id
     app.httpsGetDatByPlatform('work_activity_form', 'map', p,
       function (res) {
-        console.log('work_activity_form:' + JSON.stringify(res));
         var imgs = JSON.parse(res.msg.IMG_LIST)
         var detailImg
         for (var i = 0; i < imgs.length;i++){

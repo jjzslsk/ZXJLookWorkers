@@ -69,8 +69,6 @@ Page({
       var wname = options.workerName
       var workerClass = options.workerClass
 
-      console.log(workerClass)
-
       this.setData({
         cid: cid,
         cname: cname,

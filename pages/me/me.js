@@ -274,7 +274,6 @@ Page({
 
   openMall: function (e) {
     var page = e.currentTarget.dataset.page;
-    console.log(page);
     wx.navigateToMiniProgram({
       appId: 'wx4ae069d1473a78ce',//要打开的小程序 appId
       path: page,//打开的页面路径，如果为空则打开首页
@@ -282,11 +281,9 @@ Page({
       envVersion: 'develop',//要打开的小程序版本。仅在当前小程序为开发版或体验版时此参数有效。如果当前小程序是正式版，则打开的小程序必定是正式版。(开发版:develop,体验版:trial,正式版:release)
       success(res) {
         // 打开成功
-        console.log('打开成功:' + JSON.stringify(res))
       },
       fail(res) {
         // 打开失败
-        console.log('打开失败:' + JSON.stringify(res))
       }
     })
   },
@@ -300,8 +297,6 @@ Page({
     var param = 'userId=' + app.globalData.userId;
     app.httpsDataGet('/worker/userOrderCount', param,
       function (res) {
-        console.log('userOrderCount:' + JSON.stringify(res));
-
         that.setData({
           statusCount: res.data
         });
@@ -322,7 +317,6 @@ Page({
     )
 
     app.getAccountBalance(function (res) {
-      console.log('getAccountBalance:' + JSON.stringify(res));
       that.setData({
         myBalance: res
       });
@@ -351,7 +345,6 @@ Page({
       unreadCountTotal: unreadCountTotal
     });
 
-    console.log('unreadCountTotal::'+unreadCountTotal)
   },
 
   /**

@@ -54,7 +54,6 @@ Page({
     }else{
       wx.openSetting({
         success(res) {
-          console.log(res.authSetting)
           that.onLoad()
           // res.authSetting = {
           //   "scope.userInfo": true,
@@ -139,7 +138,6 @@ Page({
   getActivityList: function () {
     var that = this
     var p = 'START_POSITION=0' + '&END_POSITION=30' + '&BAIDU_MAP_NO=' + this.data.orgId
-    console.log(p)
     app.httpsGetDatByPlatform('work_activity_list', 'list', p,
       function (res) {
        // console.log('work_activity_list:' + JSON.stringify(res));
@@ -285,7 +283,6 @@ Page({
   },
 
   getUserInfo: function(e) {
-    console.log(e)
     app.globalData.userInfo = e.detail.userInfo
     this.setData({
       userInfo: e.detail.userInfo,

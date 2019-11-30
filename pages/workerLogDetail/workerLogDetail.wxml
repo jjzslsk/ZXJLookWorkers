@@ -34,15 +34,17 @@
       <view wx:if="{{cmtList.length>0}}">
         <view class="aui-flex-col aui-flex-middle cmt-item" wx:for="{{cmtList}}" wx:for-item="li" wx:key="index">
           <view class="aui-flex-item-2 padded-l-10">
-            <image class="cmt-avatar" src="/images/head.png"></image>
+            <image class="cmt-avatar" src="{{li.AVATAR}}" wx:if="{{li.AVATAR}}"></image>
+            <image class="cmt-avatar" src="/images/head.png" wx:else></image>
           </view>
-          <view class="aui-flex-item-10 cmt-username">{{li.CLIENT_NAME}}</view>
+          <view class="aui-flex-item-4 cmt-username">{{li.showName}}</view>
+          <view class="aui-flex-item-6 cmt-time">{{li.CRETAE_DATE}}</view>
           <!-- <view class="aui-flex-item-2 cmt-like-count"></view>
           <view class="aui-flex-item-1 padded-l-5">
             <image class="cmt-like-icon" src="/images/worker/log-like.png"></image>
           </view> -->
           <view class="aui-flex-item-2"></view>
-          <view class="aui-flex-item-10 cmt-content">{{li.SUBJECT_MEMO}}</view>
+          <view class="aui-flex-item-10 cmt-content" wx:if="{{li.SUBJECT_MEMO}}">{{li.SUBJECT_MEMO}}</view>
         </view>      
       </view>
       <view class='no-cmt' wx:else>

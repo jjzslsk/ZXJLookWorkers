@@ -23,9 +23,9 @@
 
 .cmt-title{font-size: 0.8em;padding: 5px;box-sizing: border-box;font-weight: bold;}
 .cmt-item{border-bottom: 1px #DDDDDD solid;padding: 10px 0;box-sizing: border-box;}
-.cmt-avatar{width: 30px;height: 30px;}
+.cmt-avatar{width: 30px;height: 30px;border-radius: 50%;border:1px #DDDDDD solid;}
 .cmt-username{font-size: 0.7em;}
-.cmt-content{font-size: 0.8em;padding: 5px 0;box-sizing: border-box;}
+.cmt-content{font-size: 0.8em;padding: 5px 0;box-sizing: border-box;color: #666666;}
 .cmt-like-count{text-align: right;font-size: 0.7em;color: #999999;}
 .cmt-like-icon{width:16px;height: 16px;}
 
@@ -40,3 +40,4 @@
 button::after{border: none;background: transparent;}
 .no-cmt{text-align: center;padding: 10px;font-size: 0.7em;color: #999999;}
 .footer-count{font-size: 0.7em;color: #999999;margin-left: 5px;}
+.cmt-time{font-size: 0.7em;color: #999999;text-align: right;}

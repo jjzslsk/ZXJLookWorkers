@@ -32,7 +32,6 @@ Page({
   onLoad: function (options) {
     var demandId = options.demandId
     var orderNumber = options.orderNumber
-    console.log(demandId + '----' +orderNumber)
     this.setData({
       demandId: demandId,
       orderNumber: orderNumber

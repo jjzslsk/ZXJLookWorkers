@@ -10,7 +10,7 @@
           <view class='aui-flex-item-3 img-info' wx:key="" wx:for-item="pi" wx:for="{{pickedImgs}}">
             <view class='img-delete' data-index="{{index}}" bindtap='deleteImg'>×</view>
             <view class='img-item'>
-              <image mode="aspectFit" src='{{pi}}' data-i="{{index}}"  bindtap='previewImage'></image>
+              <image mode="aspectFit" src='{{pi}}' data-i="{{index}}"  bindtap='previewLocalImage'></image>
             </view>          
           </view>
           <view class='aui-flex-item-3 img-info' bindtap='chooseImage' wx:if="{{pickedImgs.length<9}}">        

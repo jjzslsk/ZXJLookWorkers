@@ -17,7 +17,6 @@ Page({
     var that=this
     app.httpsDataGet('/worker/getHelp', 'classNo=Article_WORK_question',
       function (res) {
-        console.log('getHelp:' + JSON.stringify(res));
         if (res.data.length>0){
           that.setData({
             detail: res.data[0].ARTICLE_NOTES

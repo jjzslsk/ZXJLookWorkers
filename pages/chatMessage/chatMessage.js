@@ -33,7 +33,6 @@ Page({
     var that = this;
     //第一次加载的时候刷新数据
     var chatMsgList = app.readChatMsgList();
-    console.log('chatMsgList:' + JSON.stringify(chatMsgList));
     that.setData({
       msgDataList: chatMsgList
     });
@@ -64,7 +63,6 @@ Page({
             }
           })
         } else if (res.cancel) {
-          console.log('用户点击取消')
         }
       }
     })    

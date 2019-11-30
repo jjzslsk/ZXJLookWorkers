@@ -4,7 +4,7 @@
     <view>
       <view class="aui-flex-col list-item" wx:for="{{list}}" wx:for-item="li" wx:key="ROWID" bindtap="openDetail" data-id="{{li.W_ACT_ID}}" >
         <view class="aui-flex-item-4">
-          <image class="list-img" mode='aspectFill' src="{{li.IMG_URL}}"></image>
+          <image class="list-img" mode='aspectFill' src="{{li.IMG_URL2}}"></image>
         </view>
         <view class="aui-flex-item-8 list-content">
           <view class='title'>{{li.TITLE}}</view>

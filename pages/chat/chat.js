@@ -266,7 +266,7 @@ Page({
     sendParam.toUserId = otherPayId; //接收人id（写用户id，给所有人就all）
     sendParam.toUserName = otherPayName; //接收人名称
     sendParam.data = userInfo;
-    console.log('sendParam:'+JSON.stringify(sendParam))
+
     //发送消息
     app.onSendSocketChat(sendParam, function (sendIsSuc) {
       if (sendIsSuc) {
@@ -324,7 +324,6 @@ Page({
     var inputText = this.data.inputText.trim();
     
     if (inputText.length > 0) {
-      console.log('--------------' + inputText)
       this.sentPak(0, inputText, []);
     }
   },

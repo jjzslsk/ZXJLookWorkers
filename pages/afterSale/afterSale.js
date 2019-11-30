@@ -33,20 +33,27 @@ Page({
     })
   },
 
+  previewLocalImage: function (e) {
+    var i = e.currentTarget.dataset.i
+    var pickedImgs = this.data.pickedImgs
+    wx.previewImage({
+      current: pickedImgs[i], // 当前显示图片的http链接
+      urls: pickedImgs // 需要预览的图片http链接列表
+    })
+  },
+
   chooseImage: function (e) {
     var pickedImgs = this.data.pickedImgs
     var that = this
     var count = 9 - pickedImgs.length
-    console.log('count:' + count);
     wx.chooseImage({
       count: count,
       sizeType: ['original', 'compressed'],
       sourceType: ['album', 'camera'],
       success(res) {
         // tempFilePath可以作为img标签的src属性显示图片
-        console.log('chooseImage:' + JSON.stringify(res))
         that.setData({
-          //pickedImgs: pickedImgs,
+          //pickedImgs: res.tempFilePaths,
           compressImgs: res.tempFilePaths
         });
         that.compressImage()
@@ -61,12 +68,10 @@ Page({
 
     var that = this
     if (compressImgsIndex < compressImgs.length) {
-      console.log(compressImgs[compressImgsIndex])
       wx.compressImage({
         src: compressImgs[compressImgsIndex],
         quality: 50,
         success(res) {
-          console.log('compressImage:' + JSON.stringify(res))
           pickedImgs.unshift(res.tempFilePath)
 
           compressImgsIndex = compressImgsIndex + 1
@@ -78,7 +83,6 @@ Page({
 
           that.compressImage()
         }, fail(res) {
-          console.log('compressImageFail:' + JSON.stringify(res))
         }
       })
     } else {
@@ -114,7 +118,6 @@ Page({
     var uploadedImgIndex = this.data.uploadedImgIndex
     var pickedImgs = this.data.pickedImgs
     var uploadedImgs = this.data.uploadedImgs
-    console.log(pickedImgs[uploadedImgIndex])
 
     var uploadImgParam = {
       attUser: app.globalData.userId,
@@ -123,7 +126,6 @@ Page({
       attName: "[_" + uploadedImgIndex + "_work_apply_after_sale.jpg]",
       clientId: app.globalData.userId
     }
-    console.log('uploadImgParam:' + JSON.stringify(uploadImgParam));
     var that = this
     wx.uploadFile({
       url: app.globalData.fileUrl,
@@ -131,7 +133,6 @@ Page({
       name: 'file',
       formData: uploadImgParam,
       success(res) {
-        console.log('uploadFile:' + JSON.stringify(res));
         if (res.data) {
           var resData = JSON.parse(res.data)
           if (resData.pic && resData.pic.length > 0)
@@ -169,12 +170,10 @@ Page({
     var that=this
     app.httpsDataGet('/worker/applyForAfterSales', param,
       function (res) {
-        console.log('applyForAfterSales:' + JSON.stringify(res));
         that.initData()
         wx.hideLoading()
       },
       function (returnFrom, res) {
-        console.log('applyForAfterSaleserr:' + JSON.stringify(res));
         wx.showToast({
           title: '提交失败',
           icon: 'none',
@@ -194,15 +193,15 @@ Page({
     var that = this
     app.httpsDataGet('/worker/getAfterSales', param,
       function (res) {
-        console.log('getAfterSales:' + JSON.stringify(res));
         wx.hideLoading()
-        if (res.data){
+        if (res.data && res.data.after_sale_desc){
           var detailPics = []
           if(res.data.pics.length>0){            
             for (var i = 0; i < res.data.pics.length;i++){
               detailPics[i] = res.data.pics[i].url
             }
           }
+          
           that.setData({
             detail: res.data,
             detailPics: detailPics
@@ -210,7 +209,6 @@ Page({
         }
       },
       function (returnFrom, res) {
-        console.log('getAfterSaleserr:' + JSON.stringify(res));
         //失败
         wx.hideLoading()
       }
@@ -219,7 +217,6 @@ Page({
 
   onLoad: function (options) {
     var orderId = options.orderId
-    console.log(orderId)
     this.setData({
       orderId: orderId
     })

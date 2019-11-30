@@ -79,10 +79,8 @@ Page({
     }
     var that = this
     var param = 'userId=' + app.globalData.userId + '&status=' + status + '&pageIndex=' + this.data.indexPage + '&pageSize=' + this.data.pageNum;
-    console.log(param);
     app.httpsDataGet('/worker/getMyPublishDemand', param,
       function(res) {
-        console.log('getMyPublishDemand:' + JSON.stringify(res));
         //console.log(that.data.indexPage);
         for (var i = 0; i < res.data.length; i++) {
           res.data[i].plan_start_date = that.getLocalTime(res.data[i].plan_start_date)

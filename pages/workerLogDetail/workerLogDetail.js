@@ -39,7 +39,24 @@ Page({
   },
 
   likeTap: function (e) {    
+    if (app.globalData.userInfo == undefined || app.globalData.userInfo == null || app.globalData.userInfo == '') {
+      wx.showModal({
+        title: '提示',
+        content: '您未登录，请先登录再操作。是否前往登录？',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/bindPhone/bindPhone'
+            })
+          }
+        }
+      })
+      return
+    }
+
     var isLike = this.data.isLike
+    var detail = this.data.detail
+    var dznum = detail.DZ_NUM
     if (isLike=='0')
       isLike='1'
     else
@@ -49,14 +66,17 @@ Page({
     var p = 'SUBJECT_ID=' + this.data.lid + '&CLIENT_ID=' + app.globalData.userId +'&OK_NUM=1'
     app.httpsPlatformClass('upNoAndOk', p,
       function (res) {
-        console.log('upNoAndOk:' + JSON.stringify(res));
+        if (isLike=='1')
+          detail.DZ_NUM=dznum+1
+        else
+          detail.DZ_NUM = dznum - 1
         that.setData({
-          isLike: isLike
+          isLike: isLike,
+          detail: detail
         });
 
       },
       function (returnFrom, res) {
-        console.log('upNoAndOkerr:' + JSON.stringify(res));
         //失败
         wx.hideLoading();
       }
@@ -64,19 +84,31 @@ Page({
   },
 
   repostTap: function (e) {
-    
+    if (app.globalData.userInfo == undefined || app.globalData.userInfo == null || app.globalData.userInfo == '') {
+      wx.showModal({
+        title: '提示',
+        content: '您未登录，请先登录再操作。是否前往登录？',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/bindPhone/bindPhone'
+            })
+          }
+        }
+      })
+      return
+    }
+
     var that = this
     var p = 'SUBJECT_ID=' + this.data.lid + '&CLIENT_ID=' + app.globalData.userId + '&NO_NUM=1'
     app.httpsPlatformClass('upNoAndOk', p,
       function (res) {
-        console.log('repostTapupNoAndOk:' + JSON.stringify(res));
         // that.setData({
         //   bbsList: res.msg
         // });
 
       },
       function (returnFrom, res) {
-        console.log('repostTapupNoAndOkerr:' + JSON.stringify(res));
         //失败
         wx.hideLoading();
       }
@@ -97,6 +129,21 @@ Page({
   },
 
   comment: function (e) {
+    if (app.globalData.userInfo == undefined || app.globalData.userInfo == null || app.globalData.userInfo == '') {
+      wx.showModal({
+        title: '提示',
+        content: '您未登录，请先登录再操作。是否前往登录？',
+        success(res) {
+          if (res.confirm) {
+            wx.navigateTo({
+              url: '/pages/bindPhone/bindPhone'
+            })
+          }
+        }
+      })
+      return
+    }
+
     var content=this.data.content
     if (content == '' || content.match(/^\s+$/g)) {//判空
       wx.showToast({
@@ -113,21 +160,18 @@ Page({
 
     var that = this
     var p = 'FLAG=1&BBS_ID=1' + '&PARENT_SUBJECT_ID=' + this.data.lid + '&SUBJECT_MEMO=' + content + '&CLIENT_ID=' + app.globalData.userId
-    console.log(p)
+
     app.httpsPlatformClass('saveSubject', p,
       function (res) {
         wx.hideLoading();
-        console.log('saveSubject:' + JSON.stringify(res));
         var msg=JSON.parse(res.msg)
         if (msg.code=='0'){
           that.getCmtList()
           that.hideCmt()
         }
-        console.log('saveSubject2:' + JSON.stringify(msg));
 
       },
       function (returnFrom, res) {
-        console.log('saveSubjecterr:' + JSON.stringify(res));
         //失败
         wx.hideLoading();
       }
@@ -139,14 +183,16 @@ Page({
     var p = 'PARENT_SUBJECT_ID=' + this.data.lid + '&START_POSITION=0' + '&END_POSITION=30'
     app.httpsGetDatByPlatform('bbs_subject_reply_list', 'list', p,
       function (res) {
-        //console.log('bbs_subject_reply_list:' + JSON.stringify(res));
+        for (var i = 0; i < res.msg.length; i++) {
+          var name = res.msg[i].CLIENT_NAME.substr(0,1)+'**'
+          res.msg[i].showName=name
+        }
         that.setData({
           cmtList: res.msg
         });
 
       },
       function (returnFrom, res) {
-        console.log('bbs_subject_reply_listerr:' + JSON.stringify(res));
         //失败
         wx.hideLoading();
       }
@@ -158,10 +204,8 @@ Page({
     var p = 'SUBJECT_ID=' + this.data.lid + '&CLIENT_ID=' + app.globalData.userId + '&BROWSE_NUMBER=1'
     app.httpsPlatformClass('upBbsBrowseNum', p,
       function (res) {
-        console.log('upBbsBrowseNum:' + JSON.stringify(res));
       },
       function (returnFrom, res) {
-        console.log('upBbsBrowseNum:' + JSON.stringify(res));
         //失败
         wx.hideLoading();
       }
@@ -188,7 +232,6 @@ Page({
     var p = 'SUBJECT_ID=' + lid + '&CLIENT_ID=' + app.globalData.userId
     app.httpsGetDatByPlatform('bbs_subject_info', 'map', p,
       function (res) {
-        console.log('BBS_SUBJECT_INFO:' + JSON.stringify(res));
         var imgs = []
         if (res.msg.IMG_LIST) {
           var IMG_LIST = JSON.parse(res.msg.IMG_LIST)        
@@ -210,7 +253,6 @@ Page({
 
       },
       function (returnFrom, res) {
-        console.log('BBS_SUBJECT_INFOerr:' + JSON.stringify(res));
         //失败
         wx.hideLoading()
       }

@@ -118,7 +118,6 @@ Page({
     var id = options.id
     var status = options.status
     var type = options.type
-    console.log(status +'::' +type)
     this.setData({
       orderId:id,
       type: type
@@ -213,7 +212,6 @@ Page({
           res.data.workerInfo.shortName = res.data.workerInfo.CLIENT_ACCOUNT.substr(0,1)+'师傅'
         }
 
-        console.log('getMyOrderDetail:' + JSON.stringify(res));
         that.setData({
           detail: res.data,
           pics: pics,
@@ -239,7 +237,6 @@ Page({
     var orderId = this.data.orderId
     var workDate = this.data.detail.plan_start_date
     var workTime = workDate.substr((workDate.length-5),2)
-    console.log('workTime:'+workTime)
     var smf=0
     var payTips=''
     var content=''
@@ -278,40 +275,22 @@ Page({
           var param2 = 'id=' + orderId + '&userId=' + app.globalData.userId + '&biddingPriceId=' + id + '&nextStatus=' + (that.data.detail.work_status+1);
           app.httpsDataGet('/worker/placeTheOrder', param2,
             function (res) {
-              console.log('placeTheOrder:' + JSON.stringify(res));
+  
               var orderData=JSON.parse(res.data)
-              console.log(orderId+'placeTheOrderorderData:' + JSON.stringify(orderData));
+
               var bodyStr = '确认工人' + name + '的报价' 
               that.payDialog.showPayDialog(orderId,orderData.orderId, orderData.orderNo, orderData.amount, bodyStr, function (ret) {
-                console.log('showPayDialog:' + JSON.stringify(ret));
-            
                 that.initData()
-                
-
               });
               wx.hideLoading()
             },
             function (returnFrom, res) {
-              console.log('placeTheOrdererr:' + JSON.stringify(res));
               //失败
               wx.hideLoading()
             }
           )
-
-          // app.httpsDataGet('/worker/AcceptTheOffer', param2,
-          //   function (res) {
-          //     console.log('AcceptTheOffer:' + JSON.stringify(res));
-          //     wx.hideLoading()
-          //     that.initData()
-          //   },
-          //   function (returnFrom, res) {
-          //     console.log('AcceptTheOffererr:' + JSON.stringify(res));
-          //     //失败
-          //     wx.hideLoading()
-          //   }
-          // )
         } else if (res.cancel) {
-          console.log('用户点击取消')
+
         }
       }
     })
@@ -336,10 +315,8 @@ Page({
 
           if (status == '0' || status == '1'){
             var param = 'id=' + orderId + '&userId=' + app.globalData.userId
-            console.log('userWorkerCancelparam:' + param);
             app.httpsDataGet('/worker/userWorkerCancel', param,
               function (res) {
-                console.log('userWorkerCancel:' + JSON.stringify(res));
                 if (res.status) {
                   wx.showToast({
                     title: '取消订单成功',
@@ -354,17 +331,14 @@ Page({
                 }
               },
               function (returnFrom, res) {
-                console.log('userWorkerCancelerr:' + JSON.stringify(res));
                 //失败
                 wx.hideLoading()
               }
             )
           }else{
             var param = 'id=' + orderId + '&userId=' + app.globalData.userId + '&type=9&cancelReason='
-            console.log('cancelDemandOrderparam:' + param);
             app.httpsDataGet('/worker/cancleDemandOrder', param,
               function (res) {
-                console.log('cancelDemandOrder:' + JSON.stringify(res));
                 if (res.status) {
                   wx.showToast({
                     title: '取消订单成功',
@@ -379,14 +353,12 @@ Page({
                 }
               },
               function (returnFrom, res) {
-                console.log('cancelDemandOrdererr:' + JSON.stringify(res));
                 //失败
                 wx.hideLoading()
               }
             )
           }
         } else if (res.cancel) {
-          console.log('用户点击取消')
         }
       }
     })
@@ -413,14 +385,11 @@ Page({
 
           app.httpsDataGet('/worker/startToWorkOrder', param,
             function (res) {
-              console.log('startToWorkOrder:' + JSON.stringify(res));
               if (res.data !='开工成功'){
                 var orderData = JSON.parse(res.data.data)
-                console.log('startToWorkOrderData:' + JSON.stringify(orderData));
-    
+
                 var bodyStr = '确认开工'
                 that.payDialog.showPayDialog(orderId,orderData.orderId, orderData.orderNo, orderData.amount, bodyStr, function (ret) {
-                  console.log('showPayDialog:' + JSON.stringify(ret));
                   that.initData()
                 });
               }else{
@@ -429,13 +398,11 @@ Page({
               wx.hideLoading()
             },
             function (returnFrom, res) {
-              console.log('startToWorkOrdererr:' + JSON.stringify(res));
               //失败
               wx.hideLoading()
             }
           )
         } else if (res.cancel) {
-          console.log('用户点击取消')
         }
       }
     })
@@ -509,21 +476,18 @@ Page({
           //   content:'非常好',
           //   tag:'技能熟练'
           // }
-          console.log('finishWorkOrderparam:' + param);
+
           app.httpsDataGet('/worker/finishWorkOrder', param,
             function (res) {
-              console.log('finishWorkOrder:' + JSON.stringify(res));
               wx.hideLoading()
               that.initData()
             },
             function (returnFrom, res) {
-              console.log('finishWorkOrdererr:' + JSON.stringify(res));
               //失败
               wx.hideLoading()
             }
           )
         } else if (res.cancel) {
-          console.log('用户点击取消')
         }
       }
     })
@@ -557,8 +521,6 @@ Page({
       var l = this.data.detail.moneyChange.length-1
       editCount = this.data.detail.moneyChange[l].money
     }
-    
-    console.log(money +' - '+editCount)
 
     if (money*1 <= editCount*1) {
       wx.showModal({
@@ -580,7 +542,6 @@ Page({
     if (payCount<0)
       content = '需追加付款总款为' + money + '元，您确认提交吗？'
 
-    console.log(payCount)
     var that = this
 
     wx.showModal({
@@ -601,16 +562,13 @@ Page({
                 money:'',
                 remark:''
               })
-              console.log('userChangePriceOrder:' + JSON.stringify(res));
               var orderData = JSON.parse(res.data)
-              console.log('userChangePriceOrderData:' + JSON.stringify(orderData));
 
               if (orderData=='0'){
                 that.initData()
               }else{
                 var bodyStr = '追加付款'
                 that.payDialog.showPayDialog(orderId,orderData.orderId, orderData.orderNo, orderData.amount, bodyStr, function (ret) {
-                  console.log('showPayDialog:' + JSON.stringify(ret));
 
                   that.initData()
                   that.setData({
@@ -623,7 +581,6 @@ Page({
               wx.hideLoading()
             },
             function (returnFrom, res) {
-              console.log('userChangePriceOrdererr:' + JSON.stringify(res));
               //失败
               wx.hideLoading()
               wx.showModal({
@@ -640,7 +597,6 @@ Page({
             }
           )
         } else if (res.cancel) {
-          console.log('用户点击取消')
         }
       }
     })
@@ -690,7 +646,6 @@ Page({
         if (res.confirm) {
           that.setData({ balVisible: true })
         } else if (res.cancel) {
-          console.log('用户点击取消')
         }
       }
     })
@@ -736,7 +691,6 @@ Page({
         wx.hideLoading()
       },
       function (returnFrom, res) {
-        console.log('userChangePriceOrdererr:' + JSON.stringify(res));
         //失败
         wx.hideLoading()
       }

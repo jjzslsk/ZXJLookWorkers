@@ -15,8 +15,8 @@
             <image class="log-img" mode='aspectFill' src='{{li.IMG_LIST[0].URL}}'></image>
           </view>
           <view class="aui-flex-item-8">
-            <view class="log-desc-title">{{li.SUBJECT_TITLE}}</view>
-            <view class="log-desc ellipsis-2">{{li.SUBJECT_MEMO}}</view>
+            <view class="log-desc-title" wx:if="{{li.SUBJECT_TITLE}}">{{li.SUBJECT_TITLE}}</view>
+            <view class="log-desc ellipsis-2" wx:if="{{li.SUBJECT_MEMO}}">{{li.SUBJECT_MEMO}}</view>
             <view class="log-footer">
               <view class="aui-flex-item-1">               
                 <image class="log-footer-icon" src="/images/worker/log-like-act.png" wx:if="{{li.ZAN_FLAG=='1'}}"></image>
@@ -36,13 +36,14 @@
         </view>
 
         <view class="aui-flex-item-12" wx:else>  
-          <view class="log-desc-title">{{li.SUBJECT_TITLE}}</view>
-          <view class="log-desc ellipsis-2">{{li.SUBJECT_MEMO}}</view>
+          <view class="log-desc-title" wx:if="{{li.SUBJECT_TITLE}}">{{li.SUBJECT_TITLE}}</view>
+          <view class="log-desc ellipsis-2" wx:if="{{li.SUBJECT_MEMO}}">{{li.SUBJECT_MEMO}}</view>
           <view class="log-footer">
             <view class="aui-flex-item-1">
-              <image class="log-footer-icon" src="/images/worker/log-like.png"></image>
+              <image class="log-footer-icon" src="/images/worker/log-like-act.png" wx:if="{{li.ZAN_FLAG=='1'}}"></image>
+              <image class="log-footer-icon" src="/images/worker/log-like.png" wx:else></image>
             </view>
-            <view class="aui-flex-item-3 padded-l-5">{{li.OK_NUM ? li.OK_NUM:'0'}}</view>
+            <view class="aui-flex-item-3 padded-l-5">{{li.DZ_NUM ? li.DZ_NUM:'0'}}</view>
             <view class="aui-flex-item-1">
               <image class="log-footer-icon" src="/images/worker/log-cmt.png"></image>
             </view>

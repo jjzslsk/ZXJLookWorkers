@@ -21,14 +21,12 @@ Page({
   },
 
   searchInputFocus: function (e) {
-    console.log('focus');
     this.setData({
       focus: true
     })
   },
 
   searchInputBlur: function (e) {
-    console.log('searchInputBlur');
     this.setData({
       focus: false
     })
@@ -52,7 +50,6 @@ Page({
 
   historySearch: function (e) {
     var text = e.currentTarget.dataset.text
-    console.log('texttexttexttexttexttexttexttexttexttexttext::::'+text)
     this.setData({
       keywords: text
     })
@@ -62,7 +59,6 @@ Page({
   clearHistory: function (e) {
     try {
       wx.removeStorageSync('searchHistory')
-      console.log('clearHistory')
     } catch (e) {
       // Do something when catch error
     }
@@ -86,7 +82,6 @@ Page({
     var searchList = this.data.searchList
     if (searchList.length>1){
       for (var i=0;i<searchList.length;i++){
-        console.log(keywords + '::' + searchList[i])
         if (keywords == searchList[i]){        
           searchList.splice(i, 1);         
         }
@@ -115,11 +110,9 @@ Page({
       title: '加载中',
     })
     var param = 'searchText=' + keywords;
-    console.log(param)
     //获取工种信息
     app.httpsDataGet('/worker/getWorkerTypeAll', param,
       function (res) {
-        console.log('getWorkerTypeAll:' + JSON.stringify(res));
         var nodata=''
         for(var i=0;i<res.data.length;i++){
           if (res.data[i].child.length > 0)
@@ -147,7 +140,6 @@ Page({
     wx.getStorage({
       key: 'searchHistory',
       success(res) {
-        console.log('searchHistory:' + JSON.stringify(res));
         that.setData({
           searchList: res.data
         });   

@@ -30,7 +30,6 @@ Page({
             imgs = JSON.parse(res.msg[i].IMG_LIST)
             for (var j = 0; j < imgs.length; j++) {
               var url = imgs[j].URL.split('mp4')
-              console.log(res.msg[i].SUBJECT_TITLE + 'url.length:' + url.length)
               if (url.length > 1) {
                 res.msg[i].videoPath = imgs[j].URL
               }
@@ -38,14 +37,12 @@ Page({
           }
           res.msg[i].IMG_LIST = imgs
         }
-        console.log('bbs_my_page2:' + JSON.stringify(res));
         that.setData({
           bbsList: res.msg
         });
 
       },
       function (returnFrom, res) {
-        console.log('bbs_my_pageerr:' + JSON.stringify(res));
         //失败
         wx.hideLoading();
       }

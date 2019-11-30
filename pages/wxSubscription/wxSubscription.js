@@ -45,7 +45,6 @@ Page({
       }
 
       url = encodeURI(url)
-      console.log(url)
       this.setData({
         url: url
       })
