@@ -481,10 +481,29 @@ Page({
             function (res) {
               wx.hideLoading()
               that.initData()
+              if (res.status) {
+                wx.showToast({
+                  title: '确认竣工成功',
+                  icon: 'success',
+                  duration: 2000
+                })
+                setTimeout(() => {
+                  wx.navigateBack({
+                    delta: 1
+                  })
+                }, 2500);
+              }
             },
             function (returnFrom, res) {
               //失败
               wx.hideLoading()
+              if (!res.status) {
+                wx.showToast({
+                  title: res.msg,
+                  icon: '',
+                  duration: 2000
+                })
+              }
             }
           )
         } else if (res.cancel) {
